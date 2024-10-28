@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function Navbar() {
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-primary text-primary-foreground">
       <div className="md:hidden">
         <NavSheet />
       </div>
@@ -18,20 +18,24 @@ export function Navbar() {
       <NavigationMenu className="ml-14 hidden md:block">
         <NavigationMenuList className="flex-row">
           <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>Songs</NavigationMenuLink>
+            <Link href="/browse/songs" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-primary text-primary-foreground"}>
+                Songs
+              </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/dfsd" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()} active={true}>
+            <Link href="/browse/venues" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-primary text-primary-foreground"}>
                 Venues
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/dfsd" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>Tours</NavigationMenuLink>
+            <Link href="/browse/tours" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle() + " bg-primary text-primary-foreground"}>
+                Tours
+              </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
