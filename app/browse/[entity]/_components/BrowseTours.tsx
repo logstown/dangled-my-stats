@@ -1,5 +1,6 @@
 'use client'
 
+import { Card } from '@/components/ui/card'
 import { Show } from '@/lib/models'
 import { groupBy, map, mapValues, sortBy, uniqBy } from 'lodash'
 import { SearchIcon, XIcon } from 'lucide-react'
@@ -28,9 +29,9 @@ export function BrowseTours({ shows }: { shows: Show[] }) {
 
   return (
     <div>
-      <div className='mb-16 flex items-baseline justify-between'>
-        <h1 className='text-5xl font-bold'>Browse Tours</h1>
-        <div className='flex items-end gap-8'>
+      <div className='flex items-baseline justify-between'>
+        <h1 className='text-4xl font-medium tracking-tight'>Browse Tours</h1>
+        {/* <div className='flex items-end gap-8'>
           <label className='input input-bordered input-primary flex items-center gap-2'>
             <input
               type='text'
@@ -45,9 +46,9 @@ export function BrowseTours({ shows }: { shows: Show[] }) {
               <SearchIcon size={20} />
             )}
           </label>
-        </div>
+        </div> */}
       </div>
-      <div className='song-grid'>
+      <Card className='song-grid mt-10 bg-secondary p-8'>
         {toursByCategory.map(({ year, tours }) => (
           <div key={year} className='mb-6'>
             <h2 className='pb-2 text-2xl font-semibold text-primary'>{year}</h2>
@@ -62,7 +63,7 @@ export function BrowseTours({ shows }: { shows: Show[] }) {
             </ul>
           </div>
         ))}
-      </div>
+      </Card>
     </div>
   )
 }

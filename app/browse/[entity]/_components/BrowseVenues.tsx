@@ -66,7 +66,7 @@ export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
 
   return (
     <div>
-      <div className="mb-10 flex items-end justify-between">
+      <div className="flex items-end justify-between">
         <h1 className="text-4xl font-medium tracking-tight">Browse Venues</h1>
         <div className="flex items-end gap-8">
           {/* <label className='input input-bordered input-primary flex items-center gap-2'>
