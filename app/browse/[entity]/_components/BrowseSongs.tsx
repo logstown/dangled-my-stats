@@ -77,7 +77,7 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
           </label> */}
       {/* <RandomThing allSongs={songs} /> */}
       <div className="flex justify-between items-end flex-wrap gap-8">
-        <h1 className="text-2xl font-medium tracking-tight">Browse Songs</h1>
+        <h1 className="text-4xl font-medium tracking-tight">Browse Songs</h1>
         <div className="flex gap-16 items-end flex-wrap">
           <div className="flex flex-col gap-2">
             <Label>Sort By</Label>
