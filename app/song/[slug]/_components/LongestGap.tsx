@@ -21,9 +21,7 @@ export function LongestGap({ setSongs }: { setSongs: SetSong[] }) {
       <CardContent>
         {setSongs?.length > 1 ? (
           <div className='flex items-baseline justify-center gap-2'>
-            <div className='mt-2 text-center text-4xl font-bold'>
-              {gapShows[1].gap}
-            </div>
+            <div className='text-center text-4xl font-bold'>{gapShows[1].gap}</div>
             <p className='text-center text-xs text-muted-foreground'>shows</p>
           </div>
         ) : (

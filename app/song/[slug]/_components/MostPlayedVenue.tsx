@@ -33,7 +33,7 @@ export function MostPlayedVenue({ setSongs }: { setSongs: SetSong[] }) {
     <Card>
       <StatCardHeader Icon={TicketIcon}>Most Played Venue</StatCardHeader>
       <CardContent>
-        <div className='mt-2 text-center text-2xl font-bold'>{data[0].venue}</div>
+        <div className='text-center text-2xl font-bold'>{data[0].venue}</div>
         <p className='text-center text-xs text-muted-foreground'>
           {data[0].city}, {data[0].state ?? data[0].country}
         </p>

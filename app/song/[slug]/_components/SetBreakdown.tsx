@@ -34,7 +34,7 @@ export function SetBreakdown({ setSongs }: { setSongs: SetSong[] }) {
     <Card>
       <StatCardHeader Icon={ListMusicIcon}>Most Likely Set</StatCardHeader>
       <CardContent>
-        <div className='mt-4 text-center text-4xl font-bold'>{mostPlayed?.name}</div>
+        <div className='text-center text-4xl font-bold'>{mostPlayed?.name}</div>
       </CardContent>
     </Card>
   )

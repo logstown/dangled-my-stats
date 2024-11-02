@@ -46,7 +46,7 @@ export function SegueBreakdown({ setSongs }: { setSongs: SetSong[] }) {
     <Card>
       <StatCardHeader Icon={ArrowLeftRightIcon}>Most Likely Segue</StatCardHeader>
       <CardContent>
-        <div className='mt-4 text-center text-4xl font-bold'>{mostLikely?.name}</div>
+        <div className='text-center text-4xl font-bold'>{mostLikely?.name}</div>
       </CardContent>
     </Card>
   )

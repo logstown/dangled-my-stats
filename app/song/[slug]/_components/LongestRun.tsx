@@ -34,9 +34,7 @@ export function LongestRun({ setSongs }: { setSongs: SetSong[] }) {
       <CardContent>
         {setSongs?.length > 1 ? (
           <div className='flex items-baseline justify-center gap-2'>
-            <div className='mt-2 text-center text-4xl font-bold'>
-              {longestRun.length}
-            </div>
+            <div className='text-center text-4xl font-bold'>{longestRun.length}</div>
             <p className='text-center text-xs text-muted-foreground'>shows</p>
           </div>
         ) : (

@@ -31,7 +31,7 @@ export function MostPlayedTour({ setSongs }: { setSongs: SetSong[] }) {
       <CardContent>
         {mostPlayedTours.length ? (
           <>
-            <div className='mt-2 text-center text-2xl font-bold'>
+            <div className='text-center text-2xl font-bold'>
               {mostPlayedTours[0].name}
             </div>
             <p className='text-center text-xs text-muted-foreground'>
