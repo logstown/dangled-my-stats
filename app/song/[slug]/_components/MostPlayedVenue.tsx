@@ -1,4 +1,5 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { StatCardHeader } from '@/components/stat-card-header'
+import { Card, CardContent } from '@/components/ui/card'
 import { SetSong } from '@/lib/models'
 import { countBy, map, find, takeRight, sortBy } from 'lodash'
 import { TicketIcon } from 'lucide-react'
@@ -29,11 +30,8 @@ export function MostPlayedVenue({ setSongs }: { setSongs: SetSong[] }) {
   console.log(data[0])
 
   return (
-    <Card className='min-w-52'>
-      <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <CardTitle className='text-sm font-medium'>Most Played Venue</CardTitle>
-        <TicketIcon size={15} />
-      </CardHeader>
+    <Card>
+      <StatCardHeader Icon={TicketIcon}>Most Played Venue</StatCardHeader>
       <CardContent>
         <div className='mt-2 text-center text-2xl font-bold'>{data[0].venue}</div>
         <p className='text-center text-xs text-muted-foreground'>

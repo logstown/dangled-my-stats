@@ -6,9 +6,10 @@ import { SetBreakdown } from './_components/SetBreakdown'
 import { SegueBreakdown } from './_components/SegueBreakdown'
 import { getAllSongs, getSongFromSets } from '@/lib/phish-service'
 import { TimesPlayed } from './_components/TimesPlayed'
-import { SongGap } from './_components/Gap'
+import { LongestGap } from './_components/LongestGap'
 import { RandomThing } from '@/components/random-thing'
 import { TimelineTwoDot } from './_components/TimelineTwoDot'
+import { LongestRun } from './_components/LongestRun'
 
 export default async function SongPage({ params }: { params: { slug: string } }) {
   const { data: allSongs, error } = await getAllSongs()
@@ -73,7 +74,10 @@ export default async function SongPage({ params }: { params: { slug: string } })
           />
         </div>
         <div>
-          <SongGap gap={song.gap} largestGap={largestGap} />
+          <LongestRun setSongs={setSongs} />
+        </div>
+        <div>
+          <LongestGap setSongs={setSongs} />
         </div>
         <div>
           <SetBreakdown setSongs={setSongs} />

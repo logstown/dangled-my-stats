@@ -3,8 +3,9 @@
 import { SetSong } from '@/lib/models'
 import { countBy, find, map, reject, sortBy, takeRight } from 'lodash'
 import { useMemo } from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { BusIcon } from 'lucide-react'
+import { StatCardHeader } from '@/components/stat-card-header'
 
 export function MostPlayedTour({ setSongs }: { setSongs: SetSong[] }) {
   const mostPlayedTours = useMemo(() => {
@@ -25,11 +26,8 @@ export function MostPlayedTour({ setSongs }: { setSongs: SetSong[] }) {
   }, [setSongs])
 
   return (
-    <Card className='min-w-48'>
-      <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <CardTitle className='text-sm font-medium'>Most Played Tour</CardTitle>
-        <BusIcon size={15} />
-      </CardHeader>
+    <Card>
+      <StatCardHeader Icon={BusIcon}>Most Played Tour</StatCardHeader>
       <CardContent>
         {mostPlayedTours.length ? (
           <>

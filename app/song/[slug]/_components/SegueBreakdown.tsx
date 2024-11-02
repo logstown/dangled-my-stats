@@ -1,7 +1,8 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { StatCardHeader } from '@/components/stat-card-header'
+import { Card, CardContent } from '@/components/ui/card'
 import { SetSong } from '@/lib/models'
 import { countBy, map, maxBy, reduce } from 'lodash'
-import { ArrowLeftRightIcon, ListMusicIcon } from 'lucide-react'
+import { ArrowLeftRightIcon } from 'lucide-react'
 import { useMemo } from 'react'
 
 const segueNameMap = {
@@ -42,11 +43,8 @@ export function SegueBreakdown({ setSongs }: { setSongs: SetSong[] }) {
   const mostLikely = maxBy(data, 'value')
 
   return (
-    <Card className='min-w-52'>
-      <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <CardTitle className='text-sm font-medium'>Most Likely Segue</CardTitle>
-        <ArrowLeftRightIcon size={15} />
-      </CardHeader>
+    <Card>
+      <StatCardHeader Icon={ArrowLeftRightIcon}>Most Likely Segue</StatCardHeader>
       <CardContent>
         <div className='mt-4 text-center text-4xl font-bold'>{mostLikely?.name}</div>
       </CardContent>

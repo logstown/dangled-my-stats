@@ -1,6 +1,7 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { StatCardHeader } from '@/components/stat-card-header'
+import { Card, CardContent } from '@/components/ui/card'
 import { SetSong } from '@/lib/models'
 import { countBy, map, maxBy } from 'lodash'
 import { ListMusicIcon } from 'lucide-react'
@@ -27,16 +28,11 @@ export function SetBreakdown({ setSongs }: { setSongs: SetSong[] }) {
     }))
   }, [setSongs])
 
-  console.log(data)
-
   const mostPlayed = maxBy(data, 'value')
 
   return (
-    <Card className='min-w-44'>
-      <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <CardTitle className='text-sm font-medium'>Most Played</CardTitle>
-        <ListMusicIcon size={15} />
-      </CardHeader>
+    <Card>
+      <StatCardHeader Icon={ListMusicIcon}>Most Likely Set</StatCardHeader>
       <CardContent>
         <div className='mt-4 text-center text-4xl font-bold'>{mostPlayed?.name}</div>
       </CardContent>
