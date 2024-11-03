@@ -38,20 +38,21 @@ export function TimesPlayed({
       className='mx-auto aspect-square max-h-[250px]'
     >
       <RadialBarChart
-        width={200}
-        height={200}
+        width={115}
+        height={115}
         data={chartData}
         startAngle={90}
         endAngle={-endAngle}
-        innerRadius={80}
-        outerRadius={110}
+        innerRadius={50}
+        outerRadius={75}
+        barSize={8}
       >
         <PolarGrid
           gridType='circle'
           radialLines={false}
           stroke='none'
           className='first:fill-muted last:fill-background'
-          polarRadius={[86, 74]}
+          polarRadius={[51, 44]}
         />
         <RadialBar dataKey='timesPlayed' background cornerRadius={10} />
         <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
@@ -68,16 +69,16 @@ export function TimesPlayed({
                     <tspan
                       x={viewBox.cx}
                       y={viewBox.cy}
-                      className='fill-foreground text-4xl font-bold'
+                      className='fill-foreground text-2xl font-bold'
                     >
                       {timesPlayed.toLocaleString()}
                     </tspan>
                     <tspan
                       x={viewBox.cx}
-                      y={(viewBox.cy || 0) + 24}
+                      y={(viewBox.cy || 0) + 20}
                       className='fill-muted-foreground'
                     >
-                      Times played
+                      Plays
                     </tspan>
                   </text>
                 )

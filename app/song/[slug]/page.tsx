@@ -13,6 +13,7 @@ import {
 import Link from 'next/link'
 import { Song } from '@/lib/models'
 import { SongStats } from './_components/SongStats'
+import { TimesPlayed } from './_components/TimesPlayed'
 
 export default async function SongPage({ params }: { params: { slug: string } }) {
   const { data: allSongs, error } = await getAllSongs()
@@ -28,6 +29,10 @@ export default async function SongPage({ params }: { params: { slug: string } })
     notFound()
   }
 
+  const mostPlayedSongCount = maxBy(allSongs, x =>
+    Number(x.times_played),
+  )!.times_played
+
   const earliestDebut = minBy(allSongs, x => new Date(x.debut))?.debut
   const latestLastPlayed = maxBy(allSongs, x => new Date(x.last_played))?.last_played
 
@@ -40,7 +45,7 @@ export default async function SongPage({ params }: { params: { slug: string } })
     {
       name: 'Stats',
       link: 'stats',
-      component: <SongStats song={song} allSongs={allSongs} setSongs={setSongs} />,
+      component: <SongStats setSongs={setSongs} />,
     },
     {
       name: 'Timeline',
@@ -67,8 +72,8 @@ export default async function SongPage({ params }: { params: { slug: string } })
 
   return (
     <div>
-      <div className='border-b-2 border-primary/10 bg-secondary p-16 pb-0'>
-        <div className='flex items-end justify-between pb-10'>
+      <div className='flex flex-col gap-4 border-b-2 border-primary/10 px-16 pb-0 pt-10'>
+        <div className='flex flex-wrap items-center justify-between gap-8'>
           <div>
             <h1 className='mb-2 text-5xl font-bold tracking-tight'>
               {song.song}
@@ -76,9 +81,15 @@ export default async function SongPage({ params }: { params: { slug: string } })
                 <span className='ml-2 text-xl font-normal'>({song.abbr})</span>
               )}
             </h1>
-            <h3 className='font-light'>Original Artist: {song.artist}</h3>
+            <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
           </div>
-          <RandomThing allSongs={allSongs} />
+          <div className='flex items-center gap-8'>
+            <TimesPlayed
+              timesPlayed={Number(song.times_played)}
+              mostPlayedSongCount={Number(mostPlayedSongCount)}
+            />
+            <RandomThing allSongs={allSongs} />
+          </div>
         </div>
         <NavigationMenu className='pb-2'>
           <NavigationMenuList className='space-x-4'>
@@ -88,7 +99,7 @@ export default async function SongPage({ params }: { params: { slug: string } })
                   <NavigationMenuLink
                     className={
                       navigationMenuTriggerStyle() +
-                      ' bg-secondary text-xl font-bold text-primary/85'
+                      ' text-xl font-bold text-primary/85'
                     }
                   >
                     {x.name}

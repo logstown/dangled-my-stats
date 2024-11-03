@@ -1,34 +1,14 @@
-import { SetSong, Song } from '@/lib/models'
+import { SetSong } from '@/lib/models'
 import { LongestGap } from './LongestGap'
 import { LongestRun } from './LongestRun'
 import { MostPlayedTour } from './MostPlayedTour'
 import { MostPlayedVenue } from './MostPlayedVenue'
 import { SegueBreakdown } from './SegueBreakdown'
 import { SetBreakdown } from './SetBreakdown'
-import { TimesPlayed } from './TimesPlayed'
-import { maxBy } from 'lodash'
 
-export function SongStats({
-  song,
-  allSongs,
-  setSongs,
-}: {
-  song: Song
-  allSongs: Song[]
-  setSongs: SetSong[]
-}) {
-  const mostPlayedSongCount = maxBy(allSongs, x =>
-    Number(x.times_played),
-  )!.times_played
-
+export function SongStats({ setSongs }: { setSongs: SetSong[] }) {
   return (
-    <div className='flex flex-wrap items-center justify-around gap-6'>
-      <div>
-        <TimesPlayed
-          timesPlayed={Number(song.times_played)}
-          mostPlayedSongCount={Number(mostPlayedSongCount)}
-        />
-      </div>
+    <div className='flex flex-wrap items-center justify-evenly gap-6'>
       <div>
         <LongestRun setSongs={setSongs} />
       </div>
