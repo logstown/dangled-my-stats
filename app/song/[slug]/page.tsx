@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { Song } from '@/lib/models'
 import { SongStats } from './_components/SongStats'
 import { TimesPlayed } from './_components/TimesPlayed'
+import SongTimeline from './_components/Timeline'
 
 export default async function SongPage({ params }: { params: { slug: string } }) {
   const { data: allSongs, error } = await getAllSongs()
@@ -33,8 +34,8 @@ export default async function SongPage({ params }: { params: { slug: string } })
     Number(x.times_played),
   )!.times_played
 
-  const earliestDebut = minBy(allSongs, x => new Date(x.debut))?.debut
-  const latestLastPlayed = maxBy(allSongs, x => new Date(x.last_played))?.last_played
+  const earliestDebut = minBy(allSongs, x => new Date(x.debut))!.debut
+  const latestLastPlayed = maxBy(allSongs, x => new Date(x.last_played))!.last_played
 
   const setSongsResponse = await getSongFromSets(slug)
   const setSongs = filter(setSongsResponse.data, { artist_slug: 'phish' }).filter(
@@ -43,17 +44,12 @@ export default async function SongPage({ params }: { params: { slug: string } })
 
   const sections = [
     {
-      name: 'Stats',
-      link: 'stats',
-      component: <SongStats setSongs={setSongs} />,
-    },
-    {
       name: 'Timeline',
       link: 'timeline',
       component: (
         <div>
-          <TimelineTwoDot
-            song={song}
+          <SongTimeline
+            setSongs={setSongs}
             earliestDebut={earliestDebut}
             lastShow={latestLastPlayed}
           />
@@ -61,12 +57,13 @@ export default async function SongPage({ params }: { params: { slug: string } })
       ),
     },
     {
-      name: 'Blurbs',
-      link: 'blurbs',
+      name: 'Stats',
+      link: 'stats',
+      component: <SongStats setSongs={setSongs} />,
     },
     {
-      name: 'Lyrics',
-      link: 'lyrics',
+      name: 'Blurbs',
+      link: 'blurbs',
     },
   ]
 

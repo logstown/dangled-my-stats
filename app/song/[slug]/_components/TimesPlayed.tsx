@@ -34,6 +34,7 @@ export function TimesPlayed({
 
   return (
     <ChartContainer
+      style={{ width: 115, height: 115 }}
       config={chartConfig}
       className='mx-auto aspect-square max-h-[250px]'
     >
