@@ -72,7 +72,7 @@ export default async function SongPage({ params }: { params: { slug: string } })
   return (
     <div>
       {/* <div className='flex flex-col gap-4 border-b-2 border-primary/10 px-16 pb-0 pt-10'> */}
-      <div className='flex flex-wrap items-center justify-between gap-8 pb-16'>
+      <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
         <div>
           <h1 className='mb-2 text-5xl font-bold tracking-tight'>
             {song.song}

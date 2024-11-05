@@ -19,7 +19,8 @@ import {
 } from '@/components/ui/chart'
 import { SetSong } from '@/lib/models'
 import { useMemo } from 'react'
-import { groupBy, map } from 'lodash'
+import { countBy, find, groupBy, last, map } from 'lodash'
+import { TimesPlayed } from './TimesPlayed'
 
 export const description = 'An area chart with gradient fill'
 
@@ -32,14 +33,27 @@ const chartConfig = {
 
 export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
   const chartData = useMemo(() => {
-    const groups = groupBy(setSongs, setSong =>
+    console.log(setSongs)
+    const counts = countBy(setSongs, setSong =>
       new Date(setSong.showdate).getFullYear(),
     )
 
-    return map(groups, (yearSongs, year) => ({
-      year: new Date(`${year}-07-02`),
-      timesPlayed: yearSongs.length,
+    const mapped = map(counts, (timesPlayed, year) => ({
+      year: Number(year),
+      timesPlayed,
     }))
+
+    const final = []
+    for (let year = mapped[0].year; year <= last(mapped)!.year; year++) {
+      const found = find(mapped, { year })
+
+      final.push({
+        year,
+        timesPlayed: found?.timesPlayed ?? 0,
+      })
+    }
+
+    return final
   }, [setSongs])
 
   return (
@@ -53,7 +67,7 @@ export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
       </CardHeader>
       <CardContent>
         <ChartContainer
-          style={{ height: '400px', width: '100%' }}
+          style={{ height: '350px', width: '100%' }}
           config={chartConfig}
         >
           <AreaChart
@@ -68,9 +82,11 @@ export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
             <XAxis
               dataKey='year'
               tickLine={false}
+              //   domain={[chartData[0].year, last(chartData)?.year ?? 2024]}
               axisLine={false}
+              //   type='number'
               tickMargin={8}
-              tickFormatter={value => value.getFullYear()}
+              tickFormatter={value => (value % 5 === 0 ? value : '')}
             />
             <ChartTooltip
               cursor={false}

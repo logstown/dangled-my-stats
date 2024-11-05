@@ -1,6 +1,5 @@
 'use client'
 
-import { SearchAll } from '@/components/search-all'
 import { Card } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
@@ -9,7 +8,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
@@ -18,7 +16,6 @@ import { Slider } from '@/components/ui/slider'
 import { Song } from '@/lib/models'
 import { CheckedState } from '@radix-ui/react-checkbox'
 import { groupBy, map, replace, sortBy, split, words } from 'lodash'
-import { FilterIcon, SearchIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
@@ -125,7 +122,7 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
               value={timesPlayed}
               onValueChange={setTimesPlayed}
               max={100}
-              min={1}
+              min={2}
               step={1}
             />
           </div>
