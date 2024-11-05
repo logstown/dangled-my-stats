@@ -15,6 +15,7 @@ import { Song } from '@/lib/models'
 import { SongStats } from './_components/SongStats'
 import { TimesPlayed } from './_components/TimesPlayed'
 import SongTimeline from './_components/Timeline'
+import { TimelineFrequency } from './_components/TimelineFrequency'
 
 export default async function SongPage({ params }: { params: { slug: string } }) {
   const { data: allSongs, error } = await getAllSongs()
@@ -47,7 +48,8 @@ export default async function SongPage({ params }: { params: { slug: string } })
       name: 'Timeline',
       link: 'timeline',
       component: (
-        <div>
+        <div className='flex flex-col gap-16'>
+          <TimelineFrequency setSongs={setSongs} />
           <SongTimeline
             setSongs={setSongs}
             earliestDebut={earliestDebut}
@@ -69,26 +71,26 @@ export default async function SongPage({ params }: { params: { slug: string } })
 
   return (
     <div>
-      <div className='flex flex-col gap-4 border-b-2 border-primary/10 px-16 pb-0 pt-10'>
-        <div className='flex flex-wrap items-center justify-between gap-8'>
-          <div>
-            <h1 className='mb-2 text-5xl font-bold tracking-tight'>
-              {song.song}
-              {song.abbr && (
-                <span className='ml-2 text-xl font-normal'>({song.abbr})</span>
-              )}
-            </h1>
-            <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
-          </div>
-          <div className='flex items-center gap-8'>
-            <TimesPlayed
-              timesPlayed={Number(song.times_played)}
-              mostPlayedSongCount={Number(mostPlayedSongCount)}
-            />
-            <RandomThing allSongs={allSongs} />
-          </div>
+      {/* <div className='flex flex-col gap-4 border-b-2 border-primary/10 px-16 pb-0 pt-10'> */}
+      <div className='flex flex-wrap items-center justify-between gap-8 pb-16'>
+        <div>
+          <h1 className='mb-2 text-5xl font-bold tracking-tight'>
+            {song.song}
+            {song.abbr && (
+              <span className='ml-2 text-xl font-normal'>({song.abbr})</span>
+            )}
+          </h1>
+          <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
         </div>
-        <NavigationMenu className='pb-2'>
+        <div className='flex items-center gap-8'>
+          <TimesPlayed
+            timesPlayed={Number(song.times_played)}
+            mostPlayedSongCount={Number(mostPlayedSongCount)}
+          />
+          <RandomThing allSongs={allSongs} />
+        </div>
+      </div>
+      {/* <NavigationMenu className='pb-2'>
           <NavigationMenuList className='space-x-4'>
             {sections.map(x => (
               <NavigationMenuItem key={x.link}>
@@ -105,17 +107,29 @@ export default async function SongPage({ params }: { params: { slug: string } })
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
-        </NavigationMenu>
-      </div>
-      <div className='flex flex-col gap-24 p-16'>
+        </NavigationMenu> */}
+      {/* </div> */}
+      {/* <div className='flex flex-col gap-24'>
         {sections.map(x => (
           <div key={x.link}>
-            <h1 id={x.link} className='mb-8 text-2xl font-semibold'>
+            <h1
+              id={x.link}
+              className='mb-8 text-2xl font-semibold leading-none tracking-tight'
+            >
               {x.name}
             </h1>
             {x.component}
           </div>
         ))}
+      </div> */}
+      <div className='flex flex-col gap-16'>
+        <TimelineFrequency setSongs={setSongs} />
+        <SongTimeline
+          setSongs={setSongs}
+          earliestDebut={earliestDebut}
+          lastShow={latestLastPlayed}
+        />
+        <SongStats setSongs={setSongs} />,
       </div>
     </div>
   )

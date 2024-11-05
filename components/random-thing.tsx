@@ -4,20 +4,18 @@ import { Song } from '@/lib/models'
 import { ShuffleIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { Button } from './ui/button'
+import { useMemo } from 'react'
+import { filter } from 'lodash'
 
 export function RandomThing({ allSongs }: { allSongs: Song[] }) {
   const router = useRouter()
 
+  const moreThanOnceSongs = useMemo(() => {
+    return filter(allSongs, x => Number(x.times_played) > 1)
+  }, [allSongs])
+
   const goToRandom = () => {
-    // const letter = getRandomFromArray(songsByLetter)
-    // const song = getRandomFromArray(letter.songs)
-
-    // let songs = flatMap(songsByLetter, 'songs') as Song[]
-    // if (originalsOnly) {
-    // const phishSongs = filter(allSongs, { artist: 'Phish' })
-    // }
-
-    const song = getRandomFromArray(allSongs)
+    const song = getRandomFromArray(moreThanOnceSongs)
 
     router.push(`/song/${song.slug}`)
   }

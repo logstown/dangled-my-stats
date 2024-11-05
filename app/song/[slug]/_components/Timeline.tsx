@@ -1,11 +1,20 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { Timeline as Vis } from 'vis-timeline/standalone'
-import { DataSet } from 'vis-data'
+import { DataSet, Timeline } from 'vis-timeline/standalone'
+// import { DataSet } from 'vis-data'
 import 'vis-timeline/styles/vis-timeline-graph2d.css'
 import { SetSong } from '@/lib/models'
-import { last } from 'lodash'
+import { find, last } from 'lodash'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { useRouter } from 'next/navigation'
+import { ChartNoAxesGantt } from 'lucide-react'
 
 const SongTimeline = ({
   setSongs,
@@ -17,7 +26,8 @@ const SongTimeline = ({
   lastShow: string
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const timelineRef = useRef<Vis | null>(null)
+  const timelineRef = useRef<Timeline | null>(null)
+  const router = useRouter()
 
   useEffect(() => {
     if (!timelineRef.current) initTimeline()
@@ -48,14 +58,36 @@ const SongTimeline = ({
 
     var items2 = new DataSet(data)
 
-    timelineRef.current = new Vis(containerRef.current, items2, {
+    timelineRef.current = new Timeline(containerRef.current, items2, {
       cluster: {},
       //   start: earliestDebut,
       //   end: new Date(),
     })
+
+    timelineRef.current.on('select', ({ items }: { items: string[] }) => {
+      const setSong = find(setSongs, { uniqueid: items[0] })
+      if (setSong) {
+        window.open(setSong.permalink, '_blank')
+      }
+    })
   }
 
-  return <div ref={containerRef} />
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className='flex items-center gap-3'>
+          <ChartNoAxesGantt />
+          Timeline
+        </CardTitle>
+        <CardDescription className='ml-10'>
+          Scroll and click to browse
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div ref={containerRef} />
+      </CardContent>
+    </Card>
+  )
 }
 
 export default SongTimeline

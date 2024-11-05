@@ -5,7 +5,6 @@ import { Unlink2Icon } from 'lucide-react'
 import { StatCardHeader } from '@/components/stat-card-header'
 
 export function LongestGap({ setSongs }: { setSongs: SetSong[] }) {
-  console.log(setSongs.length)
   let gapShows: SetSong[] = []
   const gapNextShow = maxBy(tail(setSongs), x => Number(x.gap))
 

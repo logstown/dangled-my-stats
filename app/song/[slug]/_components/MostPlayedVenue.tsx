@@ -27,8 +27,6 @@ export function MostPlayedVenue({ setSongs }: { setSongs: SetSong[] }) {
     //   const venueSet = find(setSongs, { venueid: mostPopVenueId?.venueid })
   }, [setSongs])
 
-  console.log(data[0])
-
   return (
     <Card>
       <StatCardHeader Icon={TicketIcon}>Most Played Venue</StatCardHeader>

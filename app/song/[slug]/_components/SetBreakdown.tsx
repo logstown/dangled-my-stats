@@ -1,79 +1,116 @@
 'use client'
 
-import { StatCardHeader } from '@/components/stat-card-header'
-import { Card, CardContent } from '@/components/ui/card'
-import { SetSong } from '@/lib/models'
-import { countBy, map, maxBy } from 'lodash'
-import { ListMusicIcon } from 'lucide-react'
-import { useMemo } from 'react'
+import { ListMusicIcon, TrendingUp } from 'lucide-react'
+import { Pie, PieChart } from 'recharts'
 
-const setNameMap = {
-  1: 'Set 1',
-  2: 'Set 2',
-  3: 'Set 3',
-  4: 'Set 4',
-  5: 'Set 5',
-  e: 'Encore',
-  e2: 'Encore 2',
-  e3: 'Encore 3',
-} as any
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from '@/components/ui/chart'
+import { SetSong } from '@/lib/models'
+import { useMemo } from 'react'
+import { countBy, map } from 'lodash'
+
+const chartConfig = {
+  value: {
+    label: 'Count',
+  },
+  1: {
+    label: 'Set 1',
+    color: 'hsl(var(--chart-1))',
+  },
+  2: {
+    label: 'Set 2',
+    color: 'hsl(var(--chart-2))',
+  },
+  3: {
+    label: 'Set 3',
+    color: 'hsl(var(--chart-3))',
+  },
+  4: {
+    label: 'Set 4',
+    color: 'hsl(var(--chart-4))',
+  },
+  5: {
+    label: 'Set 5',
+    color: 'hsl(var(--chart-5))',
+  },
+  e: {
+    label: 'Encore',
+    color: 'hsl(var(--chart-3))',
+  },
+  e2: {
+    label: 'Encore 2',
+    color: 'hsl(var(--chart-4))',
+  },
+  e3: {
+    label: 'Encore 3',
+    color: 'hsl(var(--chart-5))',
+  },
+} satisfies ChartConfig as any
 
 export function SetBreakdown({ setSongs }: { setSongs: SetSong[] }) {
-  console.log(map(setSongs, 'set'))
   const data = useMemo(() => {
     const counts = countBy(setSongs, 'set')
     return map(counts, (count, set) => ({
       value: count,
-      name: setNameMap[set],
+      name: set,
+      fill: `var(--color-${set})`,
     }))
   }, [setSongs])
 
-  const mostPlayed = maxBy(data, 'value')
-
   return (
-    <Card>
-      <StatCardHeader Icon={ListMusicIcon}>Most Likely Set</StatCardHeader>
-      <CardContent>
-        <div className='text-center text-4xl font-bold'>{mostPlayed?.name}</div>
+    <Card className='flex flex-col'>
+      <CardHeader className=''>
+        <CardTitle className='flex items-center gap-4'>
+          <ListMusicIcon size={20} />
+          Set Distribution
+        </CardTitle>
+        {/* <CardDescription>January - June 2024</CardDescription> */}
+      </CardHeader>
+      <CardContent className='flex-1 pb-0'>
+        <ChartContainer
+          config={chartConfig}
+          style={{ height: '250px', width: '100%' }}
+        >
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={data}
+              dataKey='value'
+              nameKey='name'
+              cy={190}
+              innerRadius={100}
+              outerRadius={150}
+              paddingAngle={5}
+              startAngle={180}
+              endAngle={0}
+              label={({ name }) => chartConfig[name].label}
+            />
+          </PieChart>
+        </ChartContainer>
       </CardContent>
+      {/* <CardFooter className='flex-col gap-2 text-sm'>
+        <div className='flex items-center gap-2 font-medium leading-none'>
+          Trending up by 5.2% this month <TrendingUp className='h-4 w-4' />
+        </div>
+        <div className='leading-none text-muted-foreground'>
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter> */}
     </Card>
   )
-
-  // return (
-  //   <PieChart width={800} height={400}>
-  //     {/* <Pie
-  //         data={data}
-  //         cx={120}
-  //         cy={200}
-  //         innerRadius={60}
-  //         outerRadius={80}
-  //         fill="#8884d8"
-  //         paddingAngle={5}
-  //         dataKey="value"
-  //       >
-  //         {data.map((entry, index) => (
-  //           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-  //         ))}
-  //       </Pie> */}
-  //     <Pie
-  //       data={data}
-  //       cx={420}
-  //       cy={200}
-  //       startAngle={180}
-  //       endAngle={0}
-  //       innerRadius={120}
-  //       outerRadius={160}
-  //       fill='#8884d8'
-  //       stroke='black'
-  //       paddingAngle={5}
-  //       dataKey='value'
-  //       label={({ name }) => name}
-  //     >
-  //       {data.map((entry, index) => (
-  //         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-  //       ))}
-  //     </Pie>
-  //     <Tooltip />
-  //   </PieChart>
-  // )
 }
