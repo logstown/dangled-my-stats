@@ -20,6 +20,7 @@ import {
 import { SetSong } from '@/lib/models'
 import { useMemo } from 'react'
 import { countBy, map } from 'lodash'
+import { StatCardHeader } from '@/components/stat-card-header'
 
 const chartConfig = {
   value: {
@@ -47,11 +48,11 @@ const chartConfig = {
   },
   e: {
     label: 'Encore',
-    color: 'hsl(var(--chart-3))',
+    color: 'hsl(var(--chart-4))',
   },
   e2: {
     label: 'Encore 2',
-    color: 'hsl(var(--chart-4))',
+    color: 'hsl(var(--chart-5))',
   },
   e3: {
     label: 'Encore 3',
@@ -71,13 +72,7 @@ export function SetBreakdown({ setSongs }: { setSongs: SetSong[] }) {
 
   return (
     <Card className='flex flex-col'>
-      <CardHeader className=''>
-        <CardTitle className='flex items-center gap-4'>
-          <ListMusicIcon size={20} />
-          Set Distribution
-        </CardTitle>
-        {/* <CardDescription>January - June 2024</CardDescription> */}
-      </CardHeader>
+      <StatCardHeader Icon={ListMusicIcon}>Set Distribution</StatCardHeader>
       <CardContent className='flex-1 pb-0'>
         <ChartContainer
           config={chartConfig}

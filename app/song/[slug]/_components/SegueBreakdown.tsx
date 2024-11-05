@@ -20,6 +20,7 @@ import {
 import { SetSong } from '@/lib/models'
 import { useMemo } from 'react'
 import { countBy, map, reduce } from 'lodash'
+import { StatCardHeader } from '@/components/stat-card-header'
 
 const chartConfig = {
   value: {
@@ -73,13 +74,7 @@ export function SegueBreakdown({ setSongs }: { setSongs: SetSong[] }) {
 
   return (
     <Card className='flex flex-col'>
-      <CardHeader className=''>
-        <CardTitle className='flex items-center gap-4'>
-          <ArrowLeftRightIcon size={20} />
-          Segue Distribution
-        </CardTitle>
-        {/* <CardDescription>January - June 2024</CardDescription> */}
-      </CardHeader>
+      <StatCardHeader Icon={ArrowLeftRightIcon}>Segue Distribution</StatCardHeader>
       <CardContent className='flex-1 pb-0'>
         <ChartContainer
           config={chartConfig}

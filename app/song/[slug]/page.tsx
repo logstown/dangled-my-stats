@@ -10,8 +10,8 @@ import { TimelineFrequency } from './_components/TimelineFrequency'
 import { Button } from '@/components/ui/button'
 import { SetBreakdown } from './_components/SetBreakdown'
 import { SegueBreakdown } from './_components/SegueBreakdown'
-import { MostPlayedVenue } from './_components/MostPlayedVenue'
-import { MostPlayedTour } from './_components/MostPlayedTour'
+import { MostPlayedVenues } from './_components/MostPlayedVenues'
+import { MostPlayedTours } from './_components/MostPlayedTours'
 
 export default async function SongPage({ params }: { params: { slug: string } }) {
   const { data: allSongs, error } = await getAllSongs()
@@ -100,10 +100,10 @@ export default async function SongPage({ params }: { params: { slug: string } })
         </div>
         <div className='flex flex-col gap-8 lg:flex-row'>
           <div className='w-full lg:w-1/2'>
-            <MostPlayedVenue setSongs={setSongs} />
+            <MostPlayedVenues setSongs={setSongs} />
           </div>
           <div className='w-full lg:w-1/2'>
-            <MostPlayedTour setSongs={setSongs} />
+            <MostPlayedTours setSongs={setSongs} />
           </div>
         </div>
       </div>
