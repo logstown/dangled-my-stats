@@ -33,7 +33,6 @@ const chartConfig = {
 
 export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
   const chartData = useMemo(() => {
-    console.log(setSongs)
     const counts = countBy(setSongs, setSong =>
       new Date(setSong.showdate).getFullYear(),
     )
@@ -63,7 +62,7 @@ export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
           <AudioLinesIcon size={20} />
           Frequency
         </CardTitle>
-        <CardDescription className='ml-8'>By Year</CardDescription>
+        <CardDescription className='ml-8'>by year</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer

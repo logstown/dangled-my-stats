@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { SearchAll } from './search-all'
 import { getAllShows, getAllSongs, getAllVenues } from '@/lib/phish-service'
 import { map, uniqBy } from 'lodash'
+import { RandomThing } from './random-thing'
 
 export async function Navbar() {
   const allSongsResp = await getAllSongs()
@@ -72,7 +73,10 @@ export async function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      <SearchAll songs={songs} venues={venues} tours={tours} />
+      <div className='flex gap-4'>
+        <RandomThing />
+        <SearchAll songs={songs} venues={venues} tours={tours} />
+      </div>
     </header>
   )
 }

@@ -41,10 +41,10 @@ export default async function SongPage({ params }: { params: { slug: string } })
 
   return (
     <div>
-      <div className='flex flex-wrap items-baseline justify-between gap-8 pb-12'>
+      <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
         <div className='flex flex-wrap items-center gap-8'>
           <div>
-            <h1 className='mb-2 text-5xl font-bold tracking-tight'>
+            <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
               {song.song}
               {song.abbr && (
                 <span className='ml-2 text-xl font-normal'>({song.abbr})</span>
@@ -52,12 +52,13 @@ export default async function SongPage({ params }: { params: { slug: string } })
             </h1>
             <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
           </div>
-          <div>
-            <TimesPlayed
-              timesPlayed={Number(song.times_played)}
-              mostPlayedSongCount={Number(mostPlayedSongCount)}
-            />
-          </div>
+
+          {/* <div className='flex items-baseline gap-2'>
+            <span className='font-bold text-zinc-400'>Gap:</span>
+            <span>{song.gap}</span>
+          </div> */}
+        </div>
+        <div className='flex items-center gap-8'>
           <div>
             <div className='flex items-baseline justify-end'>
               <span className='font-bold text-zinc-400'>Debut:</span>
@@ -76,12 +77,13 @@ export default async function SongPage({ params }: { params: { slug: string } })
               </Button>
             </div>
           </div>
-          {/* <div className='flex items-baseline gap-2'>
-            <span className='font-bold text-zinc-400'>Gap:</span>
-            <span>{song.gap}</span>
-          </div> */}
+          <div>
+            <TimesPlayed
+              timesPlayed={Number(song.times_played)}
+              mostPlayedSongCount={Number(mostPlayedSongCount)}
+            />
+          </div>
         </div>
-        <RandomThing allSongs={allSongs} />
       </div>
       <div className='flex flex-col gap-16'>
         <TimelineFrequency setSongs={setSongs} />

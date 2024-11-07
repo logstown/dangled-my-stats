@@ -64,7 +64,7 @@ export function MostPlayedVenues({ setSongs }: { setSongs: SetSong[] }) {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              width={250}
+              width={200}
             />
             <ChartTooltip
               cursor={false}
