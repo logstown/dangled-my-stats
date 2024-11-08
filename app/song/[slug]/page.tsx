@@ -1,7 +1,6 @@
 import { filter, find, maxBy, minBy } from 'lodash'
 import { notFound } from 'next/navigation'
 import { getAllSongs, getSongFromSets } from '@/lib/phish-service'
-import { RandomThing } from '@/components/random-thing'
 import Link from 'next/link'
 import { Song } from '@/lib/models'
 import { TimesPlayed } from './_components/TimesPlayed'

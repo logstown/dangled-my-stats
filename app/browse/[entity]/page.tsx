@@ -1,30 +1,44 @@
-import { notFound } from "next/navigation";
-import { BrowseSongs } from "./_components/BrowseSongs";
-import { getAllShows, getAllSongs, getAllVenues } from "@/lib/phish-service";
-import { map, uniqBy } from "lodash";
-import { BrowseVenues } from "./_components/BrowseVenues";
-import { BrowseTours } from "./_components/BrowseTours";
+import { notFound } from 'next/navigation'
+import { BrowseSongs } from './_components/BrowseSongs'
+import { getAllShows, getAllSongs, getAllVenues } from '@/lib/phish-service'
+import { countBy, filter, find, map, some, uniqBy } from 'lodash'
+import { BrowseVenues } from './_components/BrowseVenues'
+import { BrowseTours } from './_components/BrowseTours'
 
-export default async function BrowseEntityPage({ params }: { params: { entity: string } }) {
-  const { entity } = await params;
+export default async function BrowseEntityPage({
+  params,
+}: {
+  params: { entity: string }
+}) {
+  const { entity } = await params
 
   switch (entity) {
-    case "songs":
-      const allSongsResp = await getAllSongs();
-      const allSongs = uniqBy(allSongsResp.data, "songid");
-      return <BrowseSongs songs={allSongs} />;
-    case "venues":
-      const allVenuesResp = await getAllVenues();
-      const venues = map(allVenuesResp.data, (x) => ({
-        ...x,
-        browse_name: x.short_name || x.venuename,
-      }));
-      return <BrowseVenues venues={venues} />;
-    case "tours":
-      const allShowsResp = await getAllShows();
-      return <BrowseTours shows={allShowsResp.data} />;
+    case 'songs':
+      const { data: allSongs } = await getAllSongs()
+      const allUniqueSongs = uniqBy(allSongs, 'songid')
+      return <BrowseSongs songs={allUniqueSongs} />
+    case 'venues':
+      const [{ data: allShows }, { data: allVenues }] = await Promise.all([
+        getAllShows(),
+        getAllVenues(),
+      ])
+      const deal = countBy(allShows, 'venueid')
+      const venues = map(deal, (count, venueid) => {
+        const foundVenue = find(allVenues, { venueid })!
+
+        return {
+          ...foundVenue,
+          timesPlayed: count,
+          browse_name: foundVenue.short_name || foundVenue.venuename || '',
+        }
+      })
+
+      return <BrowseVenues venues={venues} />
+    case 'tours':
+      const { data } = await getAllShows()
+      return <BrowseTours shows={data} />
 
     default:
-      notFound();
+      notFound()
   }
 }

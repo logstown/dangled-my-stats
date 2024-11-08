@@ -39,7 +39,6 @@ function getLastPlayedYear(song: Song) {
 }
 
 export function BrowseSongs({ songs }: { songs: Song[] }) {
-  const [searchTerm, setSearchTerm] = useState('')
   const [originalsOnly, setOriginalsOnly] = useState<CheckedState>(false)
   const [selectedSortBy, setSelectedSortBy] = useState('letter')
   const [timesPlayed, setTimesPlayed] = useState([10])
@@ -62,26 +61,14 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
         return songWords[0] === 'The' ? replace(x.song, 'The ', '') : x.song
       })
         .filter(song => !originalsOnly || song.artist === 'Phish')
-        .filter(song => song.song.toLowerCase().includes(searchTerm.toLowerCase()))
         .filter(song => Number(song.times_played) >= timesPlayed[0])
 
       return { category, songs }
     }).filter(({ songs }) => songs.length)
-  }, [songs, selectedSortBy, searchTerm, originalsOnly, timesPlayed])
+  }, [songs, selectedSortBy, originalsOnly, timesPlayed])
 
   return (
     <div>
-      {/* <label className="input input-bordered input-primary flex items-center gap-2">
-            <input
-              type="text"
-              className="grow"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            {searchTerm ? <XIcon size={20} onClick={() => setSearchTerm("")} /> : <SearchIcon size={20} />}
-          </label> */}
-      {/* <RandomThing allSongs={songs} /> */}
       <div className='flex flex-wrap items-end justify-between gap-8'>
         <h1 className='text-4xl font-medium tracking-tight'>Browse Songs</h1>
         <div className='flex flex-wrap items-end gap-16'>

@@ -75,6 +75,7 @@ export type Venue = {
 
 export interface VenueBrowse extends Venue {
   browse_name: string
+  timesPlayed: number
 }
 
 export type Show = {
