@@ -74,7 +74,9 @@ export async function Navbar() {
         </NavigationMenu>
       </div>
       <div className='flex gap-4'>
-        <RandomThing />
+        <div className='hidden md:block'>
+          <RandomThing />
+        </div>
         <SearchAll songs={songs} venues={venues} tours={tours} />
       </div>
     </header>
