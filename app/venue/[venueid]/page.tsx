@@ -1,10 +1,14 @@
-import { filter, find, uniqBy } from 'lodash'
+import { filter, find, maxBy, minBy, uniqBy } from 'lodash'
 import { notFound } from 'next/navigation'
 import { getAllVenues, getVenueSetSongs } from '@/lib/phish-service'
 import VenueTimeline from './_components/VenueTimeline'
 import { MostPlayedSongs } from './_components/MostPlayedSongs'
 import { VenueDebuts } from './_components/Debuts'
 import { VenueLastPlays } from './_components/LastPlays'
+import { VenueTours } from './_components/Tours'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { TimesPlayed } from '@/app/song/[slug]/_components/TimesPlayed'
 
 export default async function VenuePage({
   params,
@@ -24,25 +28,18 @@ export default async function VenuePage({
     notFound()
   }
 
-  console.log(venue)
-
-  // const mostPlayedSongCount = maxBy(allVenues, x =>
-  //   Number(x.times_played),
-  // )!.times_played
-
-  // const earliestDebut = minBy(allVenues, x => new Date(x.debut))!.debut
-  // const latestLastPlayed = maxBy(allVenues, x => new Date(x.last_played))!.last_played
-
   const setVenueResponse = await getVenueSetSongs(venueid)
   const setVenues = filter(setVenueResponse.data, { artist_slug: 'phish' }).filter(
     x => x.exclude === '0',
   )
 
   const venueShowsSongs = uniqBy(setVenues, 'showid')
+  const firstVenueShow = minBy(venueShowsSongs, x => new Date(x.showdate))
+  const lastVenueShow = maxBy(venueShowsSongs, x => new Date(x.showdate))
 
   //timeline                      check
   // song counts                  check
-  // list tours
+  // list tours                   check
   // average number of sets
   // Song debuts                 check
   // Song last playeds           check
@@ -55,63 +52,59 @@ export default async function VenuePage({
           <div>
             <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
               {venue.venuename}
-              {!!Number(venue.alias) && (
+              {/* {!!Number(venue.alias) && (
                 <span className='ml-2 text-xl font-normal'>({venue.alias})</span>
-              )}
+              )} */}
             </h1>
             <h3 className='ml-2 font-light'>
               {venue.city}, {venue.state ?? venue.country}
             </h3>
           </div>
         </div>
-        {/* <div className='flex items-center gap-8'>
+        <div className='flex items-center gap-8'>
           <div>
-            <div className='flex items-baseline justify-end'>
-              <span className='font-bold text-zinc-400'>Debut:</span>
-              <Button asChild variant='link'>
-                <Link href={venue.debut_permalink} target='_blank'>
-                  {venue.debut}
-                </Link>
-              </Button>
-            </div>
-            <div className='flex items-baseline justify-end'>
-              <span className='font-bold text-zinc-400'>Last Played:</span>
-              <Button asChild variant='link'>
-                <Link href={venue.last_permalink} target='_blank'>
-                  {venue.last_played}
-                </Link>
-              </Button>
-            </div>
+            {firstVenueShow && (
+              <div className='flex items-baseline justify-end'>
+                <span className='font-bold text-zinc-400'>First Show:</span>
+                <Button asChild variant='link'>
+                  <Link href={firstVenueShow.permalink} target='_blank'>
+                    {firstVenueShow.showdate}
+                  </Link>
+                </Button>
+              </div>
+            )}
+            {lastVenueShow && (
+              <div className='flex items-baseline justify-end'>
+                <span className='font-bold text-zinc-400'>Last Show:</span>
+                <Button asChild variant='link'>
+                  <Link href={lastVenueShow.permalink} target='_blank'>
+                    {lastVenueShow.showdate}
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
           <div>
             <TimesPlayed
-              timesPlayed={Number(venue.times_played)}
-              mostPlayedSongCount={Number(mostPlayedSongCount)}
+              isVenue
+              timesPlayed={Number(venueShowsSongs.length)}
+              mostPlayedSongCount={60}
             />
           </div>
-        </div> */}
+        </div>
       </div>
       <div className='flex flex-col gap-16'>
-        {/* <TimelineFrequency setVenues={setVenues} /> */}
         <VenueTimeline venueShowsSongs={venueShowsSongs} />
-        <VenueDebuts venueSongs={setVenues} />
-        <VenueLastPlays venueSongs={setVenues} />
-        <div className='w-full lg:w-1/2'>
-          <MostPlayedSongs venueSongs={setVenues} />
-        </div>
-        {/* <div className='flex flex-col gap-8 lg:flex-row'>
-          <div className='w-full lg:w-1/2'>
-            <SetBreakdown setVenues={setVenues} />
-          </div>
-          <div className='w-full lg:w-1/2'>
-            <SegueBreakdown setVenues={setVenues} />
-          </div>
-        </div>
+        <VenueTours venueSongs={setVenues} />
+        <MostPlayedSongs venueSongs={setVenues} />
         <div className='flex flex-col gap-8 lg:flex-row'>
           <div className='w-full lg:w-1/2'>
-            <MostPlayedVenues setVenues={setVenues} />
+            <VenueDebuts venueSongs={setVenues} />
           </div>
-        </div> */}
+          <div className='w-full lg:w-1/2'>
+            <VenueLastPlays venueSongs={setVenues} />
+          </div>
+        </div>
       </div>
     </div>
   )

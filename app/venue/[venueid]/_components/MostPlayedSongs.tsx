@@ -36,16 +36,16 @@ export function MostPlayedSongs({ venueSongs }: { venueSongs: SetSong[] }) {
       }
     })
     songCountsObj = sortBy(songCountsObj, 'count')
-    return takeRight(songCountsObj, 25).reverse()
+    return takeRight(songCountsObj, 15).reverse()
   }, [venueSongs])
 
   return (
     <Card>
-      <StatCardHeader Icon={MusicIcon}>Top 25 Songs</StatCardHeader>
+      <StatCardHeader Icon={MusicIcon}>Top 15 Songs</StatCardHeader>
       <CardContent>
         <ChartContainer
           config={chartConfig}
-          style={{ height: '700px', width: '100%' }}
+          style={{ height: '500px', width: '100%' }}
         >
           <BarChart
             accessibilityLayer

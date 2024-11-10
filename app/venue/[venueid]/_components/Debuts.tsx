@@ -3,7 +3,7 @@ import { badgeVariants } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { SetSong, Song } from '@/lib/models'
 import { getAllSongs } from '@/lib/phish-service'
-import { find, reduce } from 'lodash'
+import { find, reduce, uniqBy } from 'lodash'
 import { ListPlusIcon } from 'lucide-react'
 import Link from 'next/link'
 
@@ -22,12 +22,15 @@ export async function VenueDebuts({ venueSongs }: { venueSongs: SetSong[] }) {
     },
     [] as Song[],
   )
+
+  const uniqueDebuts = uniqBy(debuts, 'slug')
+
   return (
-    <Card>
+    <Card className='h-full'>
       <StatCardHeader Icon={ListPlusIcon}>Debuts</StatCardHeader>
       <CardContent>
         <div className='flex flex-wrap gap-2'>
-          {debuts.map(x => (
+          {uniqueDebuts.map(x => (
             // <Badge key={x.slug}>{x.song}</Badge>
             <Link
               href={`/song/${x.slug}`}

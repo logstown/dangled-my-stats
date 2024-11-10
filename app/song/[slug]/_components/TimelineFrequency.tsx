@@ -59,7 +59,7 @@ export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
     <Card>
       <CardHeader>
         <CardTitle className='flex items-center gap-3'>
-          <AudioLinesIcon size={20} />
+          <AudioLinesIcon className='text-neutral-400' size={20} />
           Frequency
         </CardTitle>
         <CardDescription className='ml-8'>by year</CardDescription>

@@ -76,7 +76,7 @@ const SongTimeline = ({
     <Card>
       <CardHeader>
         <CardTitle className='flex items-center gap-3'>
-          <ChartNoAxesGantt />
+          <ChartNoAxesGantt className='text-neutral-400' />
           Timeline
         </CardTitle>
         <CardDescription className='ml-10'>

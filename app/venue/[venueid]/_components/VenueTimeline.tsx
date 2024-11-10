@@ -30,7 +30,7 @@ const VenueTimeline = ({ venueShowsSongs }: { venueShowsSongs: SetSong[] }) => {
 
     const data = venueShowsSongs.map(x => ({
       id: x.showid,
-      content: x.tourname,
+      content: x.showdate,
       start: x.showdate,
     }))
 
@@ -54,7 +54,7 @@ const VenueTimeline = ({ venueShowsSongs }: { venueShowsSongs: SetSong[] }) => {
     <Card>
       <CardHeader>
         <CardTitle className='flex items-center gap-3'>
-          <ChartNoAxesGantt />
+          <ChartNoAxesGantt className='text-neutral-400' />
           Timeline
         </CardTitle>
         <CardDescription className='ml-10'>

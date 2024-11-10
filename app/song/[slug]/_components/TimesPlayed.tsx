@@ -25,9 +25,11 @@ const chartConfig = {
 export function TimesPlayed({
   timesPlayed,
   mostPlayedSongCount,
+  isVenue,
 }: {
   timesPlayed: number
   mostPlayedSongCount: number
+  isVenue?: boolean
 }) {
   const endAngle = (360 * timesPlayed) / mostPlayedSongCount - 90
   const chartData = [{ browser: 'safari', timesPlayed, fill: 'var(--color-safari)' }]
@@ -79,7 +81,7 @@ export function TimesPlayed({
                       y={(viewBox.cy || 0) + 20}
                       className='fill-muted-foreground'
                     >
-                      Plays
+                      {isVenue ? 'Shows' : 'Plays'}
                     </tspan>
                   </text>
                 )
