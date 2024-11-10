@@ -12,6 +12,8 @@ import { SegueBreakdown } from './_components/SegueBreakdown'
 import { MostPlayedVenues } from './_components/MostPlayedVenues'
 import { MostPlayedTours } from './_components/MostPlayedTours'
 
+// average length
+
 export default async function SongPage({ params }: { params: { slug: string } }) {
   const { data: allSongs, error } = await getAllSongs()
 
@@ -41,21 +43,14 @@ export default async function SongPage({ params }: { params: { slug: string } })
   return (
     <div>
       <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
-        <div className='flex flex-wrap items-center gap-8'>
-          <div>
-            <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
-              {song.song}
-              {song.abbr && (
-                <span className='ml-2 text-xl font-normal'>({song.abbr})</span>
-              )}
-            </h1>
-            <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
-          </div>
-
-          {/* <div className='flex items-baseline gap-2'>
-            <span className='font-bold text-zinc-400'>Gap:</span>
-            <span>{song.gap}</span>
-          </div> */}
+        <div className='drop-shadow-2xl'>
+          <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
+            {song.song}
+            {song.abbr && (
+              <span className='ml-2 text-xl font-normal'>({song.abbr})</span>
+            )}
+          </h1>
+          <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
         </div>
         <div className='flex items-center gap-8'>
           <div>

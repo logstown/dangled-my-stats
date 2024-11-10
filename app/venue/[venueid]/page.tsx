@@ -44,6 +44,7 @@ export default async function VenuePage({
   // Song debuts                 check
   // Song last playeds           check
   // reviews
+  // Total length of songs played
 
   return (
     <div>
