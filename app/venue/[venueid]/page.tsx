@@ -1,16 +1,10 @@
-import { filter, find, maxBy, minBy } from 'lodash'
+import { filter, find, uniqBy } from 'lodash'
 import { notFound } from 'next/navigation'
-import {
-  getAllSongs,
-  getAllVenues,
-  getSongFromSets,
-  getVenueSetSongs,
-} from '@/lib/phish-service'
-import { RandomThing } from '@/components/random-thing'
-import Link from 'next/link'
-import { Song } from '@/lib/models'
-import { Button } from '@/components/ui/button'
-import { TimesPlayed } from '@/app/song/[slug]/_components/TimesPlayed'
+import { getAllVenues, getVenueSetSongs } from '@/lib/phish-service'
+import VenueTimeline from './_components/VenueTimeline'
+import { MostPlayedSongs } from './_components/MostPlayedSongs'
+import { VenueDebuts } from './_components/Debuts'
+import { VenueLastPlays } from './_components/LastPlays'
 
 export default async function VenuePage({
   params,
@@ -43,6 +37,16 @@ export default async function VenuePage({
   const setVenues = filter(setVenueResponse.data, { artist_slug: 'phish' }).filter(
     x => x.exclude === '0',
   )
+
+  const venueShowsSongs = uniqBy(setVenues, 'showid')
+
+  //timeline                      check
+  // song counts                  check
+  // list tours
+  // average number of sets
+  // Song debuts                 check
+  // Song last playeds           check
+  // reviews
 
   return (
     <div>
@@ -87,14 +91,15 @@ export default async function VenuePage({
           </div>
         </div> */}
       </div>
-      {/* <div className='flex flex-col gap-16'>
-        <TimelineFrequency setVenues={setVenues} />
-        <SongTimeline
-          setVenues={setVenues}
-          earliestDebut={earliestDebut}
-          lastShow={latestLastPlayed}
-        />
-        <div className='flex flex-col gap-8 lg:flex-row'>
+      <div className='flex flex-col gap-16'>
+        {/* <TimelineFrequency setVenues={setVenues} /> */}
+        <VenueTimeline venueShowsSongs={venueShowsSongs} />
+        <VenueDebuts venueSongs={setVenues} />
+        <VenueLastPlays venueSongs={setVenues} />
+        <div className='w-full lg:w-1/2'>
+          <MostPlayedSongs venueSongs={setVenues} />
+        </div>
+        {/* <div className='flex flex-col gap-8 lg:flex-row'>
           <div className='w-full lg:w-1/2'>
             <SetBreakdown setVenues={setVenues} />
           </div>
@@ -106,11 +111,8 @@ export default async function VenuePage({
           <div className='w-full lg:w-1/2'>
             <MostPlayedVenues setVenues={setVenues} />
           </div>
-          <div className='w-full lg:w-1/2'>
-            <MostPlayedTours setVenues={setVenues} />
-          </div>
-        </div>
-      </div> */}
+        </div> */}
+      </div>
     </div>
   )
 }
