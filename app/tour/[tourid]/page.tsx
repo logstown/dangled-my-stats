@@ -10,11 +10,11 @@ import { getAllVenues, getTourSetSongs, getVenueSetSongs } from '@/lib/phish-ser
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { TimesPlayed } from '@/app/song/[slug]/_components/TimesPlayed'
-import VenueTimeline from '../../venue/[venueid]/_components/VenueTimeline'
-import { VenueDebuts } from '../../venue/[venueid]/_components/Debuts'
-import { VenueLastPlays } from '../../venue/[venueid]/_components/LastPlays'
-import { MostPlayedSongs } from '../../venue/[venueid]/_components/MostPlayedSongs'
 import { VenueTours } from '../../venue/[venueid]/_components/Tours'
+import ShowTimeline from '@/components/Timeline'
+import { Debuts } from '@/components/Debuts'
+import { LastPlays } from '@/components/LastPlays'
+import { MostPlayedSongs } from '@/components/MostPlayedSongs'
 
 export default async function VenuePage({ params }: { params: { tourid: string } }) {
   const { tourid } = await params
@@ -82,16 +82,16 @@ export default async function VenuePage({ params }: { params: { tourid: string }
         </div>
       </div>
       <div className='flex flex-col gap-16'>
-        <VenueTimeline venueShowsSongs={tourShowsSongs} />
+        <ShowTimeline showSongs={tourShowsSongs} />
         <div className='flex flex-col gap-8 lg:flex-row'>
           <div className='w-full lg:w-1/2'>
-            <VenueDebuts venueSongs={phishTourSongs} />
+            <Debuts setSongs={phishTourSongs} />
           </div>
           <div className='w-full lg:w-1/2'>
-            <VenueLastPlays venueSongs={phishTourSongs} />
+            <LastPlays setSongs={phishTourSongs} />
           </div>
         </div>
-        <MostPlayedSongs venueSongs={phishTourSongs} />
+        <MostPlayedSongs setSongs={phishTourSongs} />
       </div>
     </div>
   )

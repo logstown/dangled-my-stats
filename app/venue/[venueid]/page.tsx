@@ -1,14 +1,14 @@
 import { filter, find, maxBy, minBy, uniqBy } from 'lodash'
 import { notFound } from 'next/navigation'
 import { getAllVenues, getVenueSetSongs } from '@/lib/phish-service'
-import VenueTimeline from './_components/VenueTimeline'
-import { MostPlayedSongs } from './_components/MostPlayedSongs'
-import { VenueDebuts } from './_components/Debuts'
-import { VenueLastPlays } from './_components/LastPlays'
 import { VenueTours } from './_components/Tours'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { TimesPlayed } from '@/app/song/[slug]/_components/TimesPlayed'
+import ShowTimeline from '@/components/Timeline'
+import { Debuts } from '@/components/Debuts'
+import { LastPlays } from '@/components/LastPlays'
+import { MostPlayedSongs } from '@/components/MostPlayedSongs'
 
 export default async function VenuePage({
   params,
@@ -95,16 +95,16 @@ export default async function VenuePage({
         </div>
       </div>
       <div className='flex flex-col gap-16'>
-        <VenueTimeline venueShowsSongs={venueShowsSongs} />
+        <ShowTimeline showSongs={venueShowsSongs} shouldDisplayDate />
         <div className='flex flex-col gap-8 lg:flex-row'>
           <div className='w-full lg:w-1/2'>
-            <VenueDebuts venueSongs={setVenues} />
+            <Debuts setSongs={setVenues} />
           </div>
           <div className='w-full lg:w-1/2'>
-            <VenueLastPlays venueSongs={setVenues} />
+            <LastPlays setSongs={setVenues} />
           </div>
         </div>
-        <MostPlayedSongs venueSongs={setVenues} />
+        <MostPlayedSongs setSongs={setVenues} />
         <VenueTours venueSongs={setVenues} />
       </div>
     </div>

@@ -22,12 +22,12 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function MostPlayedSongs({ venueSongs }: { venueSongs: SetSong[] }) {
+export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
   const data = useMemo(() => {
-    // const filtered = reject(venueSongs, { tourid: '61' })
-    const songCounts = countBy(venueSongs, 'slug')
+    // const filtered = reject(setSongs, { tourid: '61' })
+    const songCounts = countBy(setSongs, 'slug')
     let songCountsObj = map(songCounts, (count, slug) => {
-      const song = find(venueSongs, { slug })!
+      const song = find(setSongs, { slug })!
 
       return {
         id: slug,
@@ -37,7 +37,7 @@ export function MostPlayedSongs({ venueSongs }: { venueSongs: SetSong[] }) {
     })
     songCountsObj = sortBy(songCountsObj, 'count')
     return takeRight(songCountsObj, 15).reverse()
-  }, [venueSongs])
+  }, [setSongs])
 
   return (
     <Card>

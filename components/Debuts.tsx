@@ -7,11 +7,11 @@ import { find, reduce, uniqBy } from 'lodash'
 import { ListPlusIcon } from 'lucide-react'
 import Link from 'next/link'
 
-export async function VenueDebuts({ venueSongs }: { venueSongs: SetSong[] }) {
+export async function Debuts({ setSongs }: { setSongs: SetSong[] }) {
   const { data: allSongs } = await getAllSongs()
 
   const debuts = reduce(
-    venueSongs,
+    setSongs,
     (debutList, venueSong) => {
       const foundSong = find(allSongs, { slug: venueSong.slug })!
       if (foundSong.debut === venueSong.showdate) {

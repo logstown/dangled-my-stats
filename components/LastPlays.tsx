@@ -7,11 +7,11 @@ import { find, reduce, uniqBy } from 'lodash'
 import { HandIcon } from 'lucide-react'
 import Link from 'next/link'
 
-export async function VenueLastPlays({ venueSongs }: { venueSongs: SetSong[] }) {
+export async function LastPlays({ setSongs }: { setSongs: SetSong[] }) {
   const { data: allSongs } = await getAllSongs()
 
   const lastPlayed = reduce(
-    venueSongs,
+    setSongs,
     (lastPlayedList, venueSong) => {
       const foundSong = find(allSongs, { slug: venueSong.slug })!
       if (foundSong.last_played === venueSong.showdate) {

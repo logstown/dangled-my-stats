@@ -15,7 +15,13 @@ import {
 } from '@/components/ui/card'
 import { ChartNoAxesGantt } from 'lucide-react'
 
-const VenueTimeline = ({ venueShowsSongs }: { venueShowsSongs: SetSong[] }) => {
+const ShowTimeline = ({
+  showSongs,
+  shouldDisplayDate,
+}: {
+  showSongs: SetSong[]
+  shouldDisplayDate?: boolean
+}) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const timelineRef = useRef<Timeline | null>(null)
 
@@ -26,11 +32,9 @@ const VenueTimeline = ({ venueShowsSongs }: { venueShowsSongs: SetSong[] }) => {
   const initTimeline = () => {
     if (!containerRef.current) return
 
-    console.log(venueShowsSongs)
-
-    const data = venueShowsSongs.map(x => ({
+    const data = showSongs.map(x => ({
       id: x.showid,
-      content: x.showdate,
+      content: shouldDisplayDate ? x.showdate : `${x.city}, ${x.state ?? x.country}`,
       start: x.showdate,
     }))
 
@@ -38,14 +42,12 @@ const VenueTimeline = ({ venueShowsSongs }: { venueShowsSongs: SetSong[] }) => {
 
     timelineRef.current = new Timeline(containerRef.current, items2, {
       cluster: {},
-      //   start: earliestDebut,
-      //   end: new Date(),
     })
 
     timelineRef.current.on('select', ({ items }: { items: string[] }) => {
-      const show = find(venueShowsSongs, { showid: items[0] })
-      if (show) {
-        window.open(show.permalink, '_blank')
+      const setSong = find(showSongs, { showid: items[0] })
+      if (setSong) {
+        window.open(setSong.permalink, '_blank')
       }
     })
   }
@@ -68,4 +70,4 @@ const VenueTimeline = ({ venueShowsSongs }: { venueShowsSongs: SetSong[] }) => {
   )
 }
 
-export default VenueTimeline
+export default ShowTimeline

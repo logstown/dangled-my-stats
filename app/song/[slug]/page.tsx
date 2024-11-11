@@ -1,16 +1,16 @@
-import { filter, find, maxBy, minBy } from 'lodash'
+import { filter, find, maxBy } from 'lodash'
 import { notFound } from 'next/navigation'
 import { getAllSongs, getSongFromSets } from '@/lib/phish-service'
 import Link from 'next/link'
 import { Song } from '@/lib/models'
 import { TimesPlayed } from './_components/TimesPlayed'
-import SongTimeline from './_components/Timeline'
 import { TimelineFrequency } from './_components/TimelineFrequency'
 import { Button } from '@/components/ui/button'
 import { SetBreakdown } from './_components/SetBreakdown'
 import { SegueBreakdown } from './_components/SegueBreakdown'
 import { MostPlayedVenues } from './_components/MostPlayedVenues'
 import { MostPlayedTours } from './_components/MostPlayedTours'
+import ShowTimeline from '@/components/Timeline'
 
 // average length
 
@@ -31,9 +31,6 @@ export default async function SongPage({ params }: { params: { slug: string } })
   const mostPlayedSongCount = maxBy(allSongs, x =>
     Number(x.times_played),
   )!.times_played
-
-  const earliestDebut = minBy(allSongs, x => new Date(x.debut))!.debut
-  const latestLastPlayed = maxBy(allSongs, x => new Date(x.last_played))!.last_played
 
   const setSongsResponse = await getSongFromSets(slug)
   const setSongs = filter(setSongsResponse.data, { artist_slug: 'phish' }).filter(
@@ -81,11 +78,7 @@ export default async function SongPage({ params }: { params: { slug: string } })
       </div>
       <div className='flex flex-col gap-16'>
         <TimelineFrequency setSongs={setSongs} />
-        <SongTimeline
-          setSongs={setSongs}
-          earliestDebut={earliestDebut}
-          lastShow={latestLastPlayed}
-        />
+        <ShowTimeline showSongs={setSongs} />
         <div className='flex flex-col gap-8 lg:flex-row'>
           <div className='w-full lg:w-1/2'>
             <SetBreakdown setSongs={setSongs} />
