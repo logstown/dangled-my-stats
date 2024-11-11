@@ -96,8 +96,6 @@ export default async function VenuePage({
       </div>
       <div className='flex flex-col gap-16'>
         <VenueTimeline venueShowsSongs={venueShowsSongs} />
-        <VenueTours venueSongs={setVenues} />
-        <MostPlayedSongs venueSongs={setVenues} />
         <div className='flex flex-col gap-8 lg:flex-row'>
           <div className='w-full lg:w-1/2'>
             <VenueDebuts venueSongs={setVenues} />
@@ -106,6 +104,8 @@ export default async function VenuePage({
             <VenueLastPlays venueSongs={setVenues} />
           </div>
         </div>
+        <MostPlayedSongs venueSongs={setVenues} />
+        <VenueTours venueSongs={setVenues} />
       </div>
     </div>
   )
