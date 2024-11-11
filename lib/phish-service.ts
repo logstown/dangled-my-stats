@@ -18,6 +18,12 @@ export const getVenueSetSongs = async (
   return fetchFn(`setlists/venueid/${venueid}.json`, { revalidate: 60 * 60 * 24 })
 }
 
+export const getTourSetSongs = async (
+  tourid: string,
+): Promise<PhishResponse<SetSong>> => {
+  return fetchFn(`setlists/tourid/${tourid}.json`, { revalidate: 60 * 60 * 24 })
+}
+
 export const getAllSongs = async (): Promise<PhishResponse<Song>> => {
   return fetchFn('songs.json', { revalidate: 60 * 60 * 24 })
 }

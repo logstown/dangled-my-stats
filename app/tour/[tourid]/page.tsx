@@ -1,0 +1,98 @@
+// Timeline
+// Most popular Songs
+// Debuts
+// Last played
+// total length of songs played
+
+import { filter, find, maxBy, minBy, uniqBy } from 'lodash'
+import { notFound } from 'next/navigation'
+import { getAllVenues, getTourSetSongs, getVenueSetSongs } from '@/lib/phish-service'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { TimesPlayed } from '@/app/song/[slug]/_components/TimesPlayed'
+import VenueTimeline from '../../venue/[venueid]/_components/VenueTimeline'
+import { VenueDebuts } from '../../venue/[venueid]/_components/Debuts'
+import { VenueLastPlays } from '../../venue/[venueid]/_components/LastPlays'
+import { MostPlayedSongs } from '../../venue/[venueid]/_components/MostPlayedSongs'
+import { VenueTours } from '../../venue/[venueid]/_components/Tours'
+
+export default async function VenuePage({ params }: { params: { tourid: string } }) {
+  const { tourid } = await params
+  const { data } = await getTourSetSongs(tourid)
+
+  if (!data.length) {
+    notFound()
+  }
+
+  const tourName = data[0].tourname
+  const tourWhen = data[0].tourwhen
+
+  const phishTourSongs = filter(data, { artist_slug: 'phish' }).filter(
+    x => x.exclude === '0',
+  )
+
+  const tourShowsSongs = uniqBy(phishTourSongs, 'showid')
+  const firstTourShow = minBy(tourShowsSongs, x => new Date(x.showdate))
+  const lastTourShow = maxBy(tourShowsSongs, x => new Date(x.showdate))
+
+  return (
+    <div>
+      <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
+        <div className='flex flex-wrap items-center gap-8'>
+          <div>
+            <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
+              {tourName}
+              {/* {!!Number(tour.alias) && (
+                <span className='ml-2 text-xl font-normal'>({tour.alias})</span>
+              )} */}
+            </h1>
+            <h3 className='ml-2 font-light'>{tourWhen}</h3>
+          </div>
+        </div>
+        <div className='flex items-center gap-8'>
+          <div>
+            {firstTourShow && (
+              <div className='flex items-baseline justify-end'>
+                <span className='font-bold text-zinc-400'>First Show:</span>
+                <Button asChild variant='link'>
+                  <Link href={firstTourShow.permalink} target='_blank'>
+                    {firstTourShow.showdate}
+                  </Link>
+                </Button>
+              </div>
+            )}
+            {lastTourShow && (
+              <div className='flex items-baseline justify-end'>
+                <span className='font-bold text-zinc-400'>Last Show:</span>
+                <Button asChild variant='link'>
+                  <Link href={lastTourShow.permalink} target='_blank'>
+                    {lastTourShow.showdate}
+                  </Link>
+                </Button>
+              </div>
+            )}
+          </div>
+          <div>
+            <TimesPlayed
+              isVenue
+              timesPlayed={Number(tourShowsSongs.length)}
+              mostPlayedSongCount={60}
+            />
+          </div>
+        </div>
+      </div>
+      <div className='flex flex-col gap-16'>
+        <VenueTimeline venueShowsSongs={tourShowsSongs} />
+        <div className='flex flex-col gap-8 lg:flex-row'>
+          <div className='w-full lg:w-1/2'>
+            <VenueDebuts venueSongs={phishTourSongs} />
+          </div>
+          <div className='w-full lg:w-1/2'>
+            <VenueLastPlays venueSongs={phishTourSongs} />
+          </div>
+        </div>
+        <MostPlayedSongs venueSongs={phishTourSongs} />
+      </div>
+    </div>
+  )
+}
