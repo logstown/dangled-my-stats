@@ -33,7 +33,7 @@ const ShowTimeline = ({
     if (!containerRef.current) return
 
     const data = showSongs.map(x => ({
-      id: x.showid,
+      id: x.uniqueid,
       content: shouldDisplayDate ? x.showdate : `${x.city}, ${x.state ?? x.country}`,
       start: x.showdate,
     }))
@@ -45,7 +45,7 @@ const ShowTimeline = ({
     })
 
     timelineRef.current.on('select', ({ items }: { items: string[] }) => {
-      const setSong = find(showSongs, { showid: items[0] })
+      const setSong = find(showSongs, { uniqueid: items[0] })
       if (setSong) {
         window.open(setSong.permalink, '_blank')
       }
