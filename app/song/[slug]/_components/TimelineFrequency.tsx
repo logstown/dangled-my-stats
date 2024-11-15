@@ -1,7 +1,7 @@
 'use client'
 
 import { AudioLinesIcon, ChartLineIcon, TrendingUp } from 'lucide-react'
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 
 import {
   Card,
@@ -32,6 +32,11 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
+  // const now = new Date();
+  // const domainToday = d3.scaleTime().domain([d3.timeDay.floor(now), d3.timeDay.ceil(now)]);
+  // const timeFormatter = (tick) => {return d3.timeFormat('%H:%M:%S')(new Date(tick));};
+  // const ticks = domainToday.ticks(d3.timeHour.every(1));
+
   const chartData = useMemo(() => {
     const counts = countBy(setSongs, setSong =>
       new Date(setSong.showdate).getFullYear(),
@@ -43,11 +48,11 @@ export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
     }))
 
     const final = []
-    for (let year = mapped[0].year; year <= last(mapped)!.year; year++) {
+    for (let year = 1983; year <= new Date().getFullYear() + 1; year++) {
       const found = find(mapped, { year })
 
       final.push({
-        year,
+        year: +new Date(year, 0),
         timesPlayed: found?.timesPlayed ?? 0,
       })
     }
@@ -81,11 +86,22 @@ export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
             <XAxis
               dataKey='year'
               tickLine={false}
-              //   domain={[chartData[0].year, last(chartData)?.year ?? 2024]}
+              domain={[+new Date(1983, 0), +new Date()]}
               axisLine={false}
-              //   type='number'
+              type='number'
+              scale='time'
+              interval='equidistantPreserveStart'
+              tickFormatter={time =>
+                new Date(time).toLocaleString('en-US', { year: 'numeric' })
+              }
               tickMargin={8}
-              tickFormatter={value => (value % 5 === 0 ? value : '')}
+            />
+            <YAxis
+              dataKey='timesPlayed'
+              tickLine={false}
+              axisLine={false}
+              width={25}
+              allowDecimals={false}
             />
             <ChartTooltip
               cursor={false}
