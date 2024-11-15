@@ -11,6 +11,7 @@ import { SearchAll } from './search-all'
 import { getAllShows, getAllSongs, getAllVenues } from '@/lib/phish-service'
 import { map, uniqBy } from 'lodash'
 import { RandomThing } from './random-thing'
+import { shirkhand } from '@/app/fonts/fonts'
 
 export async function Navbar() {
   const allSongsResp = await getAllSongs()
@@ -31,7 +32,12 @@ export async function Navbar() {
         <NavSheet />
       </div>
       <div className='flex items-center'>
-        <div className='text-xl font-semibold tracking-tight'>Dangled My Stats</div>
+        <Link
+          href='/'
+          className={` ${shirkhand.className} text-xl font-semibold tracking-tight`}
+        >
+          Dangled My Stats
+        </Link>
         <NavigationMenu className='ml-14 hidden md:block'>
           <NavigationMenuList className='flex-row'>
             <NavigationMenuItem>
