@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
 import { VenueBrowse } from '@/lib/models'
+import { maxBy } from 'lodash'
 import { groupBy, map, replace, sortBy, words } from 'lodash'
 import Link from 'next/link'
 import { parseAsInteger, useQueryState } from 'nuqs'
@@ -77,6 +78,11 @@ export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
     })
   }, [venues, selectedSortBy, timesPlayed])
 
+  const maxTimesPlayed = useMemo(() => {
+    const thing = maxBy(venues, x => Number(x.timesPlayed))
+    return Number(thing?.timesPlayed) ?? 0
+  }, [venues])
+
   return (
     <div>
       <div className='flex items-end justify-between'>
@@ -104,7 +110,7 @@ export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
               className='w-[400px]'
               value={[timesPlayed]}
               onValueChange={x => setTimesPlayed(x[0])}
-              max={100}
+              max={maxTimesPlayed}
               min={2}
               step={1}
             />

@@ -18,6 +18,7 @@ import { groupBy, map, replace, sortBy, split, words } from 'lodash'
 import Link from 'next/link'
 import { useMemo } from 'react'
 import { parseAsBoolean, parseAsInteger, useQueryState } from 'nuqs'
+import { maxBy } from 'lodash'
 
 function isLetter(character: string) {
   return character.toLowerCase() != character.toUpperCase()
@@ -75,6 +76,11 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
     }).filter(({ songs }) => songs.length)
   }, [songs, selectedSortBy, originalsOnly, timesPlayed])
 
+  const maxTimesPlayed = useMemo(() => {
+    const thing = maxBy(songs, x => Number(x.times_played))
+    return Number(thing?.times_played) ?? 0
+  }, [songs])
+
   return (
     <div>
       <div className='flex flex-wrap items-end justify-between gap-8'>
@@ -118,7 +124,7 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
               className='w-[400px]'
               value={[timesPlayed]}
               onValueChange={x => setTimesPlayed(x[0])}
-              max={620}
+              max={maxTimesPlayed}
               min={2}
               step={1}
             />
