@@ -14,7 +14,8 @@ import { Slider } from '@/components/ui/slider'
 import { VenueBrowse } from '@/lib/models'
 import { groupBy, map, replace, sortBy, words } from 'lodash'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { parseAsInteger, useQueryState } from 'nuqs'
+import { useMemo } from 'react'
 
 function isLetter(character: string) {
   return character.toLowerCase() != character.toUpperCase()
@@ -32,8 +33,13 @@ function getState({ state, country }: VenueBrowse) {
 }
 
 export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
-  const [selectedSortBy, setSelectedSortBy] = useState('letter')
-  const [timesPlayed, setTimesPlayed] = useState([2])
+  const [selectedSortBy, setSelectedSortBy] = useQueryState('selectedSortBy', {
+    defaultValue: 'letter',
+  })
+  const [timesPlayed, setTimesPlayed] = useQueryState(
+    'timesPlayed',
+    parseAsInteger.withDefault(2),
+  )
 
   const venuesByCategory = useMemo(() => {
     const grouped = groupBy(venues, (x: VenueBrowse) => {
@@ -56,7 +62,7 @@ export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
           case 'state':
             return `${x.city} ${x.browse_name}`
         }
-      }).filter(x => Number(x.timesPlayed) >= timesPlayed[0])
+      }).filter(x => Number(x.timesPlayed) >= timesPlayed)
 
       return { category, venues }
     }).filter(({ venues }) => venues.length)
@@ -78,7 +84,7 @@ export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
         <div className='flex flex-wrap items-end gap-16'>
           <div className='flex flex-col gap-2'>
             <Label>Sort By</Label>
-            <Select value={selectedSortBy} onValueChange={e => setSelectedSortBy(e)}>
+            <Select value={selectedSortBy} onValueChange={setSelectedSortBy}>
               <SelectTrigger className='w-[180px]'>
                 <SelectValue />
               </SelectTrigger>
@@ -96,8 +102,8 @@ export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
             </label>
             <Slider
               className='w-[400px]'
-              value={timesPlayed}
-              onValueChange={setTimesPlayed}
+              value={[timesPlayed]}
+              onValueChange={x => setTimesPlayed(x[0])}
               max={100}
               min={2}
               step={1}

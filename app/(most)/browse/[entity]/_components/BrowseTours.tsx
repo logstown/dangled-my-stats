@@ -4,11 +4,9 @@ import { Card } from '@/components/ui/card'
 import { Show } from '@/lib/models'
 import { groupBy, map, mapValues, sortBy, uniqBy } from 'lodash'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 export function BrowseTours({ shows }: { shows: Show[] }) {
-  const [searchTerm, setSearchTerm] = useState('')
-
   const toursByCategory = useMemo(() => {
     let grouped = groupBy(shows, 'showyear')
     grouped = mapValues(grouped, shows =>
@@ -16,15 +14,13 @@ export function BrowseTours({ shows }: { shows: Show[] }) {
     )
 
     const toursByCat = map(grouped, (tours: Show[], year: string) => {
-      tours = sortBy(tours, x => Number(x.showmonth)).filter(tour =>
-        tour.tour_name?.toLowerCase().includes(searchTerm.toLowerCase()),
-      )
+      tours = sortBy(tours, x => Number(x.showmonth))
 
       return { year, tours }
-    }).filter(({ tours }) => tours.length)
+    })
 
     return sortBy(toursByCat, 'year')
-  }, [shows, searchTerm])
+  }, [shows])
 
   return (
     <div>

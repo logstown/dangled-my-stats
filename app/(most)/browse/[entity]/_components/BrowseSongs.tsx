@@ -14,10 +14,10 @@ import {
 import { Slider } from '@/components/ui/slider'
 // import { RandomThing } from '@/components/RandomThing'
 import { Song } from '@/lib/models'
-import { CheckedState } from '@radix-ui/react-checkbox'
 import { groupBy, map, replace, sortBy, split, words } from 'lodash'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
+import { parseAsBoolean, parseAsInteger, useQueryState } from 'nuqs'
 
 function isLetter(character: string) {
   return character.toLowerCase() != character.toUpperCase()
@@ -39,9 +39,17 @@ function getLastPlayedYear(song: Song) {
 }
 
 export function BrowseSongs({ songs }: { songs: Song[] }) {
-  const [originalsOnly, setOriginalsOnly] = useState<CheckedState>(false)
-  const [selectedSortBy, setSelectedSortBy] = useState('letter')
-  const [timesPlayed, setTimesPlayed] = useState([10])
+  const [originalsOnly, setOriginalsOnly] = useQueryState(
+    'orignalsOnly',
+    parseAsBoolean.withDefault(false),
+  )
+  const [selectedSortBy, setSelectedSortBy] = useQueryState('selectedSortBy', {
+    defaultValue: 'letter',
+  })
+  const [timesPlayed, setTimesPlayed] = useQueryState(
+    'timesPlayed',
+    parseAsInteger.withDefault(10),
+  )
 
   const songsByCategory = useMemo(() => {
     const grouped = groupBy(songs, (x: Song) => {
@@ -61,7 +69,7 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
         return songWords[0] === 'The' ? replace(x.song, 'The ', '') : x.song
       })
         .filter(song => !originalsOnly || song.artist === 'Phish')
-        .filter(song => Number(song.times_played) >= timesPlayed[0])
+        .filter(song => Number(song.times_played) >= timesPlayed)
 
       return { category, songs }
     }).filter(({ songs }) => songs.length)
@@ -74,7 +82,7 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
         <div className='flex flex-wrap items-end gap-16'>
           <div className='flex flex-col gap-2'>
             <Label>Sort By</Label>
-            <Select value={selectedSortBy} onValueChange={e => setSelectedSortBy(e)}>
+            <Select value={selectedSortBy} onValueChange={setSelectedSortBy}>
               <SelectTrigger className='w-[180px]'>
                 <SelectValue />
               </SelectTrigger>
@@ -91,7 +99,9 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
             <Checkbox
               id='originals-only'
               checked={originalsOnly}
-              onCheckedChange={setOriginalsOnly}
+              onCheckedChange={x =>
+                setOriginalsOnly(x === 'indeterminate' ? false : x)
+              }
             />
             <label
               htmlFor='originals-only'
@@ -106,8 +116,8 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
             </label>
             <Slider
               className='w-[400px]'
-              value={timesPlayed}
-              onValueChange={setTimesPlayed}
+              value={[timesPlayed]}
+              onValueChange={x => setTimesPlayed(x[0])}
               max={620}
               min={2}
               step={1}
