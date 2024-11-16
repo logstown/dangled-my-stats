@@ -3,7 +3,6 @@
 import { Card } from '@/components/ui/card'
 import { Show } from '@/lib/models'
 import { groupBy, map, mapValues, sortBy, uniqBy } from 'lodash'
-import { SearchIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
@@ -30,23 +29,7 @@ export function BrowseTours({ shows }: { shows: Show[] }) {
   return (
     <div>
       <div className='flex items-baseline justify-between'>
-        <h1 className='text-4xl font-medium tracking-tight'>Browse Tours</h1>
-        {/* <div className='flex items-end gap-8'>
-          <label className='input input-bordered input-primary flex items-center gap-2'>
-            <input
-              type='text'
-              className='grow'
-              placeholder='Search'
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-            />
-            {searchTerm ? (
-              <XIcon size={20} onClick={() => setSearchTerm('')} />
-            ) : (
-              <SearchIcon size={20} />
-            )}
-          </label>
-        </div> */}
+        <h1 className='text-4xl font-medium tracking-tight'>Tours</h1>
       </div>
       <Card className='song-grid mt-10 bg-secondary p-8'>
         {toursByCategory.map(({ year, tours }) => (

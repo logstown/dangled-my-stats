@@ -32,10 +32,7 @@ export async function Navbar() {
         <NavSheet />
       </div>
       <div className='flex items-center'>
-        <Link
-          href='/'
-          className={` ${shirkhand.className} text-xl font-semibold tracking-tight`}
-        >
+        <Link href='/' className={` ${shirkhand.className} text-2xl text-secondary`}>
           Dangled My Stats
         </Link>
         <NavigationMenu className='ml-14 hidden md:block'>

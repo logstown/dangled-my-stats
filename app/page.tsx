@@ -5,10 +5,10 @@ import { shirkhand } from './fonts/fonts'
 
 export default function Home() {
   return (
-    <div className='flex h-full flex-col items-center justify-center gap-8'>
-      <div className='flex flex-col items-center gap-1 sm:gap-2 lg:gap-4'>
+    <div className='flex h-full flex-col items-center justify-center gap-10'>
+      <div className='flex flex-col items-center gap-1 sm:gap-2 lg:gap-3'>
         <h1
-          className={`${shirkhand.className} text-4xl drop-shadow-2xl md:text-5xl xl:text-7xl`}
+          className={`${shirkhand.className} text-4xl leading-none tracking-tight drop-shadow-2xl md:text-5xl xl:text-7xl`}
         >
           Dangled My Stats
         </h1>

@@ -74,7 +74,7 @@ export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
   return (
     <div>
       <div className='flex items-end justify-between'>
-        <h1 className='text-4xl font-medium tracking-tight'>Browse Venues</h1>
+        <h1 className='text-4xl font-medium tracking-tight'>Venues</h1>
         <div className='flex flex-wrap items-end gap-16'>
           <div className='flex flex-col gap-2'>
             <Label>Sort By</Label>

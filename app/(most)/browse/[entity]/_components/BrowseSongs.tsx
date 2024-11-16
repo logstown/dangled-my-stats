@@ -70,7 +70,7 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
   return (
     <div>
       <div className='flex flex-wrap items-end justify-between gap-8'>
-        <h1 className='text-4xl font-medium tracking-tight'>Browse Songs</h1>
+        <h1 className='text-4xl font-medium tracking-tight'>Songs</h1>
         <div className='flex flex-wrap items-end gap-16'>
           <div className='flex flex-col gap-2'>
             <Label>Sort By</Label>
@@ -108,7 +108,7 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
               className='w-[400px]'
               value={timesPlayed}
               onValueChange={setTimesPlayed}
-              max={100}
+              max={620}
               min={2}
               step={1}
             />
