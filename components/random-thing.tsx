@@ -5,7 +5,9 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Button } from './ui/button'
 import { useEffect, useRef, useState } from 'react'
 import { filter, uniqBy } from 'lodash'
-import { getAllShows, getAllSongs, getAllVenues } from '@/lib/phish-service'
+import { getAllShows, getAllSongs } from '@/lib/phish-service'
+import { groupBy } from 'lodash'
+import { map } from 'lodash'
 
 export function RandomThing() {
   const router = useRouter()
@@ -21,7 +23,11 @@ export function RandomThing() {
           filter(data, x => Number(x.times_played) > 1),
         )
       case 'venue':
-        return getAllVenues().then(({ data }) => data)
+        return getAllShows().then(({ data: allShows }) => {
+          const allStatsShows = filter(allShows, { exclude_from_stats: '0' })
+          const byVenueId = groupBy(allStatsShows, 'venueid')
+          return map(byVenueId, x => x[0])
+        })
       case 'tour':
         return getAllShows().then(({ data }) =>
           uniqBy(data, 'tourid').filter(x => x.tourid !== '61'),
