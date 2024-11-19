@@ -1,19 +1,21 @@
 'use client'
 
-import { MusicIcon } from 'lucide-react'
+import { ChevronsUpDownIcon, MusicIcon } from 'lucide-react'
 import { Bar, BarChart, XAxis, YAxis } from 'recharts'
 
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { useMemo } from 'react'
-import { countBy, find, map, sortBy, takeRight } from 'lodash'
+import { useEffect, useState } from 'react'
+import { countBy, find, map, sortBy } from 'lodash'
 import { SetSong } from '@/lib/models'
 import { StatCardHeader } from '@/components/stat-card-header'
+import { Button } from './ui/button'
+import { take } from 'lodash'
 
 const chartConfig = {
   count: {
@@ -23,7 +25,11 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
-  const data = useMemo(() => {
+  const [chartData, setChartData] = useState<any>([])
+  const [dataChunk, setDataChunk] = useState(1)
+  const [isStillMore, setIsStillMore] = useState(true)
+
+  useEffect(() => {
     // const filtered = reject(setSongs, { tourid: '61' })
     const songCounts = countBy(setSongs, 'slug')
     let songCountsObj = map(songCounts, (count, slug) => {
@@ -35,9 +41,11 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
         count,
       }
     })
-    songCountsObj = sortBy(songCountsObj, 'count')
-    return takeRight(songCountsObj, 15).reverse()
-  }, [setSongs])
+    songCountsObj = sortBy(songCountsObj, 'count').reverse()
+    const displayedSongLength = dataChunk * 15
+    setChartData(take(songCountsObj, displayedSongLength))
+    setIsStillMore(displayedSongLength < songCountsObj.length)
+  }, [setSongs, dataChunk])
 
   return (
     <Card>
@@ -45,11 +53,12 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
       <CardContent>
         <ChartContainer
           config={chartConfig}
-          style={{ height: '500px', width: '100%' }}
+          className={`w-full`}
+          style={{ height: `${dataChunk * 500}px` }}
         >
           <BarChart
             accessibilityLayer
-            data={data}
+            data={chartData}
             layout='vertical'
             margin={{
               left: -20,
@@ -72,14 +81,13 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
           </BarChart>
         </ChartContainer>
       </CardContent>
-      {/* <CardFooter className='flex-col items-start gap-2 text-sm'>
-        <div className='flex gap-2 font-medium leading-none'>
-          Trending up by 5.2% this month <TrendingUp className='h-4 w-4' />
-        </div>
-        <div className='leading-none text-muted-foreground'>
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter> */}
+      <CardFooter className='flex justify-center'>
+        {isStillMore && (
+          <Button onClick={() => setDataChunk(x => x + 1)} variant='secondary'>
+            <ChevronsUpDownIcon /> More
+          </Button>
+        )}
+      </CardFooter>
     </Card>
   )
 }
