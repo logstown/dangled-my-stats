@@ -58,7 +58,7 @@ export default async function VenuePage({
               )} */}
             </h1>
             <h3 className='ml-2 font-light'>
-              {venue.city}, {venue.state ?? venue.country}
+              {venue.city}, {venue.state || venue.country}
             </h3>
           </div>
         </div>

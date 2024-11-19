@@ -34,7 +34,7 @@ const ShowTimeline = ({
 
     const data = showSongs.map(x => ({
       id: x.uniqueid,
-      content: shouldDisplayDate ? x.showdate : `${x.city}, ${x.state ?? x.country}`,
+      content: shouldDisplayDate ? x.showdate : `${x.city}, ${x.state || x.country}`,
       start: x.showdate,
     }))
 

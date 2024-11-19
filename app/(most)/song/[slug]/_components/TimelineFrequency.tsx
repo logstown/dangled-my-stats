@@ -1,13 +1,12 @@
 'use client'
 
-import { AudioLinesIcon, ChartLineIcon, TrendingUp } from 'lucide-react'
+import { AudioLinesIcon } from 'lucide-react'
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
@@ -19,8 +18,7 @@ import {
 } from '@/components/ui/chart'
 import { SetSong } from '@/lib/models'
 import { useMemo } from 'react'
-import { countBy, find, groupBy, last, map } from 'lodash'
-import { TimesPlayed } from './TimesPlayed'
+import { countBy, find, map } from 'lodash'
 
 export const description = 'An area chart with gradient fill'
 

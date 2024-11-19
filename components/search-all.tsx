@@ -3,7 +3,6 @@
 import { SearchIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -13,8 +12,7 @@ import {
   CommandSeparator,
 } from './ui/command'
 import { useMemo, useState } from 'react'
-import { groupBy, join } from 'lodash'
-import { Show, Song, Venue, VenueBrowse } from '@/lib/models'
+import { Show, Song, VenueBrowse } from '@/lib/models'
 import { useRouter } from 'next/navigation'
 
 export function SearchAll({
