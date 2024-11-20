@@ -19,10 +19,12 @@ export function SearchAll({
   songs,
   venues,
   tours,
+  isNavbar,
 }: {
   songs: Song[]
   venues: VenueBrowse[]
   tours: Show[]
+  isNavbar: boolean
 }) {
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
@@ -59,9 +61,15 @@ export function SearchAll({
 
   return (
     <>
-      <Button variant='ghost' size='icon' onClick={() => setOpen(true)}>
-        <SearchIcon className='h-4 w-4' />
-      </Button>
+      {isNavbar ? (
+        <Button variant='ghost' size='icon' onClick={() => setOpen(true)}>
+          <SearchIcon className='h-4 w-4' />
+        </Button>
+      ) : (
+        <Button size='icon' onClick={() => setOpen(true)}>
+          <SearchIcon className='h-5 w-5' />
+        </Button>
+      )}
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput
           placeholder='Search songs, venues, tours...'

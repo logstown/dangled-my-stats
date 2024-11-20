@@ -1,28 +1,17 @@
-'use client'
-
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
+import { SearchAllServer } from '@/components/search-all-server'
 import { shirkhand } from './fonts/fonts'
-import { AuroraBackground } from '@/components/ui/aurora-background'
-import { motion } from 'framer-motion'
+import { AuroraWrapper } from '@/components/aurora-wrapper'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <AuroraBackground>
-      <motion.div
-        initial={{ opacity: 0.0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: 'easeInOut',
-        }}
-        className='flex h-full flex-col items-center justify-center gap-10'
-      >
+    <AuroraWrapper>
+      <div className='flex h-full flex-col items-center justify-center gap-10'>
         <div className='flex flex-col items-center gap-1 sm:gap-2 lg:gap-3'>
           <h1
-            className={`${shirkhand.className} text-4xl leading-none tracking-tight drop-shadow-2xl md:text-5xl xl:text-7xl`}
+            className={`${shirkhand.className} bg-gradient-to-br from-primary to-teal-500 bg-clip-text text-4xl leading-none tracking-tight text-transparent drop-shadow-2xl md:text-5xl xl:text-7xl`}
           >
             Dangled My Stats
           </h1>
@@ -64,8 +53,11 @@ export default function Home() {
           >
             <Link href='/browse/tours'>Tours</Link>
           </Button>
+          <div className='ml-6'>
+            <SearchAllServer />
+          </div>
         </div>
-      </motion.div>
-    </AuroraBackground>
+      </div>
+    </AuroraWrapper>
   )
 }

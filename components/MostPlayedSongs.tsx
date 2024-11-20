@@ -83,7 +83,11 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
       </CardContent>
       <CardFooter className='flex justify-center'>
         {isStillMore && (
-          <Button onClick={() => setDataChunk(x => x + 1)} variant='secondary'>
+          <Button
+            onClick={() => setDataChunk(x => x + 1)}
+            variant='secondary'
+            size='sm'
+          >
             <ChevronsUpDownIcon /> More
           </Button>
         )}
