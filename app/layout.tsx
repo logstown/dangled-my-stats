@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang='en' className='h-full'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} h-full bg-neutral-100 antialiased`}
       >
         <NuqsAdapter>{children}</NuqsAdapter>
       </body>

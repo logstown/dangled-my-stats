@@ -15,6 +15,7 @@ import ShowTimeline from '@/components/Timeline'
 import { Debuts } from '@/components/Debuts'
 import { LastPlays } from '@/components/LastPlays'
 import { MostPlayedSongs } from '@/components/MostPlayedSongs'
+import { Card } from '@/components/ui/card'
 
 export default async function VenuePage({ params }: { params: { tourid: string } }) {
   const { tourid } = await params
@@ -38,48 +39,48 @@ export default async function VenuePage({ params }: { params: { tourid: string }
   return (
     <div>
       <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
-        <div className='flex flex-wrap items-center gap-8'>
-          <div>
-            <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
-              {tourName}
-              {/* {!!Number(tour.alias) && (
+        <div className='flex flex-wrap items-center gap-8 pl-6'>
+          <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
+            {tourName}
+            {/* {!!Number(tour.alias) && (
                 <span className='ml-2 text-xl font-normal'>({tour.alias})</span>
               )} */}
-            </h1>
-            <h3 className='ml-2 font-light'>{tourWhen}</h3>
-          </div>
+          </h1>
+          <h3 className='ml-2 font-light'>{tourWhen}</h3>
         </div>
-        <div className='flex items-center gap-8'>
-          <div>
-            {firstTourShow && (
-              <div className='flex items-baseline justify-end'>
-                <span className='font-bold text-zinc-400'>First Show:</span>
-                <Button asChild variant='link'>
-                  <Link href={firstTourShow.permalink} target='_blank'>
-                    {firstTourShow.showdate}
-                  </Link>
-                </Button>
-              </div>
-            )}
-            {lastTourShow && (
-              <div className='flex items-baseline justify-end'>
-                <span className='font-bold text-zinc-400'>Last Show:</span>
-                <Button asChild variant='link'>
-                  <Link href={lastTourShow.permalink} target='_blank'>
-                    {lastTourShow.showdate}
-                  </Link>
-                </Button>
-              </div>
-            )}
+        <Card className='p-6'>
+          <div className='flex items-center gap-8'>
+            <div>
+              {firstTourShow && (
+                <div className='flex items-baseline justify-end'>
+                  <span className='font-bold text-zinc-400'>First Show:</span>
+                  <Button asChild variant='link'>
+                    <Link href={firstTourShow.permalink} target='_blank'>
+                      {firstTourShow.showdate}
+                    </Link>
+                  </Button>
+                </div>
+              )}
+              {lastTourShow && (
+                <div className='flex items-baseline justify-end'>
+                  <span className='font-bold text-zinc-400'>Last Show:</span>
+                  <Button asChild variant='link'>
+                    <Link href={lastTourShow.permalink} target='_blank'>
+                      {lastTourShow.showdate}
+                    </Link>
+                  </Button>
+                </div>
+              )}
+            </div>
+            <div>
+              <TimesPlayed
+                isVenue
+                timesPlayed={Number(tourShowsSongs.length)}
+                mostPlayedSongCount={60}
+              />
+            </div>
           </div>
-          <div>
-            <TimesPlayed
-              isVenue
-              timesPlayed={Number(tourShowsSongs.length)}
-              mostPlayedSongCount={60}
-            />
-          </div>
-        </div>
+        </Card>
       </div>
       <div className='flex flex-col gap-16'>
         <ShowTimeline showSongs={tourShowsSongs} />

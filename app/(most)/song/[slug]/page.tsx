@@ -11,6 +11,7 @@ import { SegueBreakdown } from './_components/SegueBreakdown'
 import { MostPlayedVenues } from './_components/MostPlayedVenues'
 import { MostPlayedTours } from './_components/MostPlayedTours'
 import ShowTimeline from '@/components/Timeline'
+import { Card } from '@/components/ui/card'
 
 // average length
 
@@ -40,7 +41,7 @@ export default async function SongPage({ params }: { params: { slug: string } })
   return (
     <div>
       <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
-        <div className='drop-shadow-2xl'>
+        <div className='pl-6 drop-shadow-2xl'>
           <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
             {song.song}
             {song.abbr && (
@@ -49,32 +50,34 @@ export default async function SongPage({ params }: { params: { slug: string } })
           </h1>
           <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
         </div>
-        <div className='flex items-center gap-8'>
-          <div>
-            <div className='flex items-baseline justify-end'>
-              <span className='font-bold text-zinc-400'>Debut:</span>
-              <Button asChild variant='link'>
-                <Link href={song.debut_permalink} target='_blank'>
-                  {song.debut}
-                </Link>
-              </Button>
+        <Card className='p-6'>
+          <div className='flex items-center gap-8'>
+            <div>
+              <div className='flex items-baseline justify-end'>
+                <span className='font-bold text-zinc-400'>Debut:</span>
+                <Button asChild variant='link'>
+                  <Link href={song.debut_permalink} target='_blank'>
+                    {song.debut}
+                  </Link>
+                </Button>
+              </div>
+              <div className='flex items-baseline justify-end'>
+                <span className='font-bold text-zinc-400'>Last Played:</span>
+                <Button asChild variant='link'>
+                  <Link href={song.last_permalink} target='_blank'>
+                    {song.last_played}
+                  </Link>
+                </Button>
+              </div>
             </div>
-            <div className='flex items-baseline justify-end'>
-              <span className='font-bold text-zinc-400'>Last Played:</span>
-              <Button asChild variant='link'>
-                <Link href={song.last_permalink} target='_blank'>
-                  {song.last_played}
-                </Link>
-              </Button>
+            <div>
+              <TimesPlayed
+                timesPlayed={Number(song.times_played)}
+                mostPlayedSongCount={Number(mostPlayedSongCount)}
+              />
             </div>
           </div>
-          <div>
-            <TimesPlayed
-              timesPlayed={Number(song.times_played)}
-              mostPlayedSongCount={Number(mostPlayedSongCount)}
-            />
-          </div>
-        </div>
+        </Card>
       </div>
       <div className='flex flex-col gap-16'>
         <TimelineFrequency setSongs={setSongs} />
@@ -97,21 +100,5 @@ export default async function SongPage({ params }: { params: { slug: string } })
         </div>
       </div>
     </div>
-  )
-}
-
-function SectionTitle({
-  children,
-  className,
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
-  return (
-    <h3
-      className={`text-xl font-light uppercase text-muted-foreground ${className}`}
-    >
-      {children}
-    </h3>
   )
 }

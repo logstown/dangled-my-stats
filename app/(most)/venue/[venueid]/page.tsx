@@ -9,6 +9,7 @@ import ShowTimeline from '@/components/Timeline'
 import { Debuts } from '@/components/Debuts'
 import { LastPlays } from '@/components/LastPlays'
 import { MostPlayedSongs } from '@/components/MostPlayedSongs'
+import { Card } from '@/components/ui/card'
 
 export default async function VenuePage({
   params,
@@ -49,7 +50,7 @@ export default async function VenuePage({
   return (
     <div>
       <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
-        <div className='flex flex-wrap items-center gap-8'>
+        <div className='flex flex-wrap items-center gap-8 pl-6'>
           <div>
             <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
               {venue.venuename}
@@ -62,37 +63,39 @@ export default async function VenuePage({
             </h3>
           </div>
         </div>
-        <div className='flex items-center gap-8'>
-          <div>
-            {firstVenueShow && (
-              <div className='flex items-baseline justify-end'>
-                <span className='font-bold text-zinc-400'>First Show:</span>
-                <Button asChild variant='link'>
-                  <Link href={firstVenueShow.permalink} target='_blank'>
-                    {firstVenueShow.showdate}
-                  </Link>
-                </Button>
-              </div>
-            )}
-            {lastVenueShow && (
-              <div className='flex items-baseline justify-end'>
-                <span className='font-bold text-zinc-400'>Last Show:</span>
-                <Button asChild variant='link'>
-                  <Link href={lastVenueShow.permalink} target='_blank'>
-                    {lastVenueShow.showdate}
-                  </Link>
-                </Button>
-              </div>
-            )}
+        <Card className='p-6'>
+          <div className='flex items-center gap-8'>
+            <div>
+              {firstVenueShow && (
+                <div className='flex items-baseline justify-end'>
+                  <span className='font-bold text-zinc-400'>First Show:</span>
+                  <Button asChild variant='link'>
+                    <Link href={firstVenueShow.permalink} target='_blank'>
+                      {firstVenueShow.showdate}
+                    </Link>
+                  </Button>
+                </div>
+              )}
+              {lastVenueShow && (
+                <div className='flex items-baseline justify-end'>
+                  <span className='font-bold text-zinc-400'>Last Show:</span>
+                  <Button asChild variant='link'>
+                    <Link href={lastVenueShow.permalink} target='_blank'>
+                      {lastVenueShow.showdate}
+                    </Link>
+                  </Button>
+                </div>
+              )}
+            </div>
+            <div>
+              <TimesPlayed
+                isVenue
+                timesPlayed={Number(venueShowsSongs.length)}
+                mostPlayedSongCount={60}
+              />
+            </div>
           </div>
-          <div>
-            <TimesPlayed
-              isVenue
-              timesPlayed={Number(venueShowsSongs.length)}
-              mostPlayedSongCount={60}
-            />
-          </div>
-        </div>
+        </Card>
       </div>
       <div className='flex flex-col gap-16'>
         <ShowTimeline showSongs={venueShowsSongs} shouldDisplayDate />

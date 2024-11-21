@@ -25,9 +25,9 @@ export function BrowseTours({ shows }: { shows: Show[] }) {
   return (
     <div>
       <div className='flex items-baseline justify-between'>
-        <h1 className='text-4xl font-medium tracking-tight'>Tours</h1>
+        <h1 className='pl-6 text-4xl font-medium tracking-tight'>Tours</h1>
       </div>
-      <Card className='song-grid mt-10 bg-secondary p-8'>
+      <Card className='song-grid mt-10 p-8'>
         {toursByCategory.map(({ year, tours }) => (
           <div key={year} className='mb-6'>
             <h2 className='pb-2 text-2xl font-semibold text-primary'>{year}</h2>
