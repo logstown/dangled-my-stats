@@ -50,18 +50,13 @@ export default async function VenuePage({
   return (
     <div>
       <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
-        <div className='flex flex-wrap items-center gap-8 pl-6'>
-          <div>
-            <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
-              {venue.venuename}
-              {/* {!!Number(venue.alias) && (
-                <span className='ml-2 text-xl font-normal'>({venue.alias})</span>
-              )} */}
-            </h1>
-            <h3 className='ml-2 font-light'>
-              {venue.city}, {venue.state || venue.country}
-            </h3>
-          </div>
+        <div className='pl-6 drop-shadow-2xl'>
+          <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
+            {venue.venuename}
+          </h1>
+          <h3 className='ml-2 font-light'>
+            {venue.city}, {venue.state || venue.country}
+          </h3>
         </div>
         <Card className='p-6'>
           <div className='flex items-center gap-8'>

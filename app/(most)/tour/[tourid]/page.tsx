@@ -39,12 +39,9 @@ export default async function VenuePage({ params }: { params: { tourid: string }
   return (
     <div>
       <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
-        <div className='flex flex-wrap items-center gap-8 pl-6'>
+        <div className='pl-6 drop-shadow-2xl'>
           <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
             {tourName}
-            {/* {!!Number(tour.alias) && (
-                <span className='ml-2 text-xl font-normal'>({tour.alias})</span>
-              )} */}
           </h1>
           <h3 className='ml-2 font-light'>{tourWhen}</h3>
         </div>
@@ -76,7 +73,7 @@ export default async function VenuePage({ params }: { params: { tourid: string }
               <TimesPlayed
                 isVenue
                 timesPlayed={Number(tourShowsSongs.length)}
-                mostPlayedSongCount={60}
+                mostPlayedSongCount={124}
               />
             </div>
           </div>
