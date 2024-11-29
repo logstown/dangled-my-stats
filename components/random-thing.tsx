@@ -9,7 +9,7 @@ import { getAllShows, getAllSongs } from '@/lib/phish-service'
 import { groupBy } from 'lodash'
 import { map } from 'lodash'
 
-export function RandomThing() {
+export function RandomThing({ onClick }: { onClick?: () => void }) {
   const router = useRouter()
   const pathname = usePathname()
   const entities = useRef<any[]>([])
@@ -60,6 +60,10 @@ export function RandomThing() {
   }, [pathname])
 
   const goToRandom = () => {
+    if (onClick) {
+      onClick()
+    }
+
     const thing = getRandomFromArray(entities.current)
 
     switch (pathAt) {

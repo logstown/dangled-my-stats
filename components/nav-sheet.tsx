@@ -1,6 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+'use client'
+
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Sheet,
   SheetClose,
@@ -10,42 +12,90 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { MenuIcon } from "lucide-react";
+} from '@/components/ui/sheet'
+import { MenuIcon } from 'lucide-react'
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from './ui/navigation-menu'
+import Link from 'next/link'
+import { useState } from 'react'
+import { RandomThing } from './random-thing'
 
 export function NavSheet() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Sheet>
+    <Sheet
+      open={open}
+      onOpenChange={setOpen}
+      aria-describedby='navigation'
+      aria-description='navigation'
+    >
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant='ghost' size='icon'>
           <MenuIcon />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent
+        side='left'
+        aria-describedby='navigation'
+        aria-description='navigation'
+      >
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
+          <SheetTitle>Navigation</SheetTitle>
+          <SheetDescription className='hidden'>
+            Make changes to your profile here. Click save when you're done.
+          </SheetDescription>
         </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
-        <SheetFooter>
+        <NavigationMenu orientation='horizontal'>
+          <NavigationMenuList className='flex-col items-start space-x-0'>
+            <NavigationMenuItem>
+              <Link href='/browse/songs' legacyBehavior passHref>
+                <NavigationMenuLink
+                  onClick={() => setOpen(false)}
+                  className={navigationMenuTriggerStyle()}
+                >
+                  Songs
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href='/browse/venues' legacyBehavior passHref>
+                <NavigationMenuLink
+                  onClick={() => setOpen(false)}
+                  className={navigationMenuTriggerStyle()}
+                >
+                  Venues
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href='/browse/tours' legacyBehavior passHref>
+                <NavigationMenuLink
+                  onClick={() => setOpen(false)}
+                  className={navigationMenuTriggerStyle()}
+                >
+                  Tours
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <RandomThing onClick={() => setOpen(false)} />
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        {/* <SheetFooter>
           <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
+            <Button type='submit'>Save changes</Button>
           </SheetClose>
-        </SheetFooter>
+        </SheetFooter> */}
       </SheetContent>
     </Sheet>
-  );
+  )
 }
