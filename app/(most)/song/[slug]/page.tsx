@@ -15,7 +15,11 @@ import { Card } from '@/components/ui/card'
 
 // average length
 
-export default async function SongPage({ params }: { params: { slug: string } }) {
+export default async function SongPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
   const { data: allSongs, error } = await getAllSongs()
 
   if (error) {

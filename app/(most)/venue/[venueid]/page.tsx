@@ -14,7 +14,7 @@ import { Card } from '@/components/ui/card'
 export default async function VenuePage({
   params,
 }: {
-  params: { venueid: string }
+  params: Promise<{ venueid: string }>
 }) {
   const { data: allVenues, error } = await getAllVenues()
 

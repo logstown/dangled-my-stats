@@ -8,7 +8,7 @@ import { BrowseTours } from './_components/BrowseTours'
 export default async function BrowseEntityPage({
   params,
 }: {
-  params: { entity: string }
+  params: Promise<{ entity: string }>
 }) {
   const { entity } = await params
 

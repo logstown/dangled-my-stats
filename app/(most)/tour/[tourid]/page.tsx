@@ -16,7 +16,11 @@ import { LastPlays } from '@/components/LastPlays'
 import { MostPlayedSongs } from '@/components/MostPlayedSongs'
 import { Card } from '@/components/ui/card'
 
-export default async function VenuePage({ params }: { params: { tourid: string } }) {
+export default async function VenuePage({
+  params,
+}: {
+  params: Promise<{ tourid: string }>
+}) {
   const { tourid } = await params
   const { data } = await getTourSetSongs(tourid)
 
