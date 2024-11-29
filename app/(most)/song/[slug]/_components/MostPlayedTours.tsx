@@ -3,7 +3,7 @@
 import { BusIcon } from 'lucide-react'
 import { Bar, BarChart, XAxis, YAxis } from 'recharts'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import {
   ChartConfig,
   ChartContainer,

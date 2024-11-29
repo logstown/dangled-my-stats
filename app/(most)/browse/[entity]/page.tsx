@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { BrowseSongs } from './_components/BrowseSongs'
 import { getAllShows, getAllSongs, getAllVenues } from '@/lib/phish-service'
-import { countBy, filter, find, map, some, uniqBy } from 'lodash'
+import { countBy, filter, find, map, uniqBy } from 'lodash'
 import { BrowseVenues } from './_components/BrowseVenues'
 import { BrowseTours } from './_components/BrowseTours'
 

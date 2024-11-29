@@ -4,13 +4,12 @@
 // Last played
 // total length of songs played
 
-import { filter, find, maxBy, minBy, uniqBy } from 'lodash'
+import { filter, maxBy, minBy, uniqBy } from 'lodash'
 import { notFound } from 'next/navigation'
-import { getAllVenues, getTourSetSongs, getVenueSetSongs } from '@/lib/phish-service'
+import { getTourSetSongs } from '@/lib/phish-service'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { TimesPlayed } from '@/app/(most)/song/[slug]/_components/TimesPlayed'
-import { VenueTours } from '../../venue/[venueid]/_components/Tours'
 import ShowTimeline from '@/components/Timeline'
 import { Debuts } from '@/components/Debuts'
 import { LastPlays } from '@/components/LastPlays'

@@ -1,6 +1,6 @@
 import { SetSong } from '@/lib/models'
 import { cloneDeep, findIndex, last, maxBy, reject, tail } from 'lodash'
-import { CheckIcon, CircleEllipsisIcon, CircleIcon } from 'lucide-react'
+import { CircleEllipsisIcon, CircleIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export function SongTimeline({ setSongs }: { setSongs: SetSong[] }) {

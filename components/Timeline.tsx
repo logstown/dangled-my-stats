@@ -25,10 +25,6 @@ const ShowTimeline = ({
   const containerRef = useRef<HTMLDivElement | null>(null)
   const timelineRef = useRef<Timeline | null>(null)
 
-  useEffect(() => {
-    if (!timelineRef.current) initTimeline()
-  }, [containerRef])
-
   const initTimeline = () => {
     if (!containerRef.current) return
 
@@ -38,7 +34,7 @@ const ShowTimeline = ({
       start: x.showdate,
     }))
 
-    var items2 = new DataSet(data)
+    const items2 = new DataSet(data)
 
     timelineRef.current = new Timeline(containerRef.current, items2, {
       cluster: {},
@@ -51,6 +47,10 @@ const ShowTimeline = ({
       }
     })
   }
+
+  useEffect(() => {
+    if (!timelineRef.current) initTimeline()
+  }, [containerRef, initTimeline])
 
   return (
     <Card>

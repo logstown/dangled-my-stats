@@ -8,7 +8,6 @@ import {
   CarouselNext,
 } from '@/components/ui/carousel'
 import { SetSong } from '@/lib/models'
-import Link from 'next/link'
 import { useRef } from 'react'
 import Autoplay from 'embla-carousel-autoplay'
 import { Blockquote, BlockquoteAuthor } from '@/components/ui/blockquote'

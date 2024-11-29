@@ -1,16 +1,9 @@
 'use client'
 
-import { ArrowLeftRightIcon, TrendingUp } from 'lucide-react'
+import { ArrowLeftRightIcon } from 'lucide-react'
 import { Pie, PieChart } from 'recharts'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import {
   ChartConfig,
   ChartContainer,

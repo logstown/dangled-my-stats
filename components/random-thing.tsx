@@ -57,7 +57,7 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
     })
 
     setPathAt(newPathAt)
-  }, [pathname])
+  }, [pathname, pathAt])
 
   const goToRandom = () => {
     if (onClick) {

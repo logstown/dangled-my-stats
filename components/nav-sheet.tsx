@@ -1,14 +1,10 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -16,11 +12,9 @@ import {
 import { MenuIcon } from 'lucide-react'
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from './ui/navigation-menu'
 import Link from 'next/link'
@@ -49,9 +43,7 @@ export function NavSheet() {
       >
         <SheetHeader>
           <SheetTitle>Navigation</SheetTitle>
-          <SheetDescription className='hidden'>
-            Make changes to your profile here. Click save when you're done.
-          </SheetDescription>
+          <SheetDescription className='hidden'>dummy</SheetDescription>
         </SheetHeader>
         <NavigationMenu orientation='horizontal'>
           <NavigationMenuList className='flex-col items-start space-x-0'>

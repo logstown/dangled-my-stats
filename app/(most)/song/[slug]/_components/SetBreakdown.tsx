@@ -1,16 +1,9 @@
 'use client'
 
-import { ListMusicIcon, TrendingUp } from 'lucide-react'
+import { ListMusicIcon } from 'lucide-react'
 import { Pie, PieChart } from 'recharts'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import {
   ChartConfig,
   ChartContainer,

@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { SetSong } from '@/lib/models'
 import { filter, map, split } from 'lodash'
 import sanitizeHtml from 'sanitize-html'
