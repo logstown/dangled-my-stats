@@ -53,7 +53,7 @@ export default function HomePage() {
           >
             <Link href='/browse/tours'>Tours</Link>
           </Button>
-          <div className='ml-6'>
+          <div className='sm:ml-6'>
             <SearchAllServer />
           </div>
         </div>

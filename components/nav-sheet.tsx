@@ -42,7 +42,7 @@ export function NavSheet() {
         aria-description='navigation'
       >
         <SheetHeader>
-          <SheetTitle>Navigation</SheetTitle>
+          <SheetTitle>Browse</SheetTitle>
           <SheetDescription className='hidden'>dummy</SheetDescription>
         </SheetHeader>
         <NavigationMenu orientation='horizontal'>
