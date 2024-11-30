@@ -83,10 +83,10 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
 
   return (
     <div>
-      <div className='flex flex-wrap items-center justify-between gap-8'>
-        <h1 className='pl-6 text-4xl font-medium tracking-tight'>Songs</h1>
+      <div className='flex flex-wrap items-center justify-center gap-8 sm:justify-between'>
+        <h1 className='text-4xl font-medium tracking-tight sm:pl-6'>Songs</h1>
         <Card className='p-6'>
-          <div className='flex flex-wrap items-end gap-16'>
+          <div className='flex flex-wrap items-end gap-10 sm:gap-16'>
             <div className='flex flex-col gap-2'>
               <Label>Sort By</Label>
               <Select value={selectedSortBy} onValueChange={setSelectedSortBy}>
@@ -117,12 +117,12 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
                 Originals Only
               </label>
             </div>
-            <div className='mb-3 flex flex-col gap-2'>
+            <div className='mb-3 flex w-full flex-col gap-2 sm:w-fit'>
               <label htmlFor=''>
                 Times Played: <strong>{timesPlayed}</strong>
               </label>
               <Slider
-                className='w-[400px]'
+                className='w-full sm:w-[400px]'
                 value={[timesPlayed]}
                 onValueChange={x => setTimesPlayed(x[0])}
                 max={maxTimesPlayed}
