@@ -58,7 +58,7 @@ export default async function SongPage({
           <div className='flex items-center gap-8'>
             <div>
               <div className='flex items-baseline justify-end'>
-                <span className='font-bold text-zinc-400'>Debut:</span>
+                <span className='font-bold text-zinc-500'>Debut:</span>
                 <Button asChild variant='link'>
                   <Link href={song.debut_permalink} target='_blank'>
                     {song.debut}
@@ -66,7 +66,7 @@ export default async function SongPage({
                 </Button>
               </div>
               <div className='flex items-baseline justify-end'>
-                <span className='font-bold text-zinc-400'>Last Played:</span>
+                <span className='font-bold text-zinc-500'>Last Played:</span>
                 <Button asChild variant='link'>
                   <Link href={song.last_permalink} target='_blank'>
                     {song.last_played}

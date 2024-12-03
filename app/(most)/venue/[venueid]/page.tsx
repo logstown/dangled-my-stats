@@ -63,7 +63,7 @@ export default async function VenuePage({
             <div>
               {firstVenueShow && (
                 <div className='flex items-baseline justify-end'>
-                  <span className='font-bold text-zinc-400'>First Show:</span>
+                  <span className='font-bold text-zinc-500'>First Show:</span>
                   <Button asChild variant='link'>
                     <Link href={firstVenueShow.permalink} target='_blank'>
                       {firstVenueShow.showdate}
@@ -73,7 +73,7 @@ export default async function VenuePage({
               )}
               {lastVenueShow && (
                 <div className='flex items-baseline justify-end'>
-                  <span className='font-bold text-zinc-400'>Last Show:</span>
+                  <span className='font-bold text-zinc-500'>Last Show:</span>
                   <Button asChild variant='link'>
                     <Link href={lastVenueShow.permalink} target='_blank'>
                       {lastVenueShow.showdate}
