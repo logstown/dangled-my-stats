@@ -16,6 +16,8 @@ import { SetSong } from '@/lib/models'
 import { StatCardHeader } from '@/components/stat-card-header'
 import { Button } from './ui/button'
 import { take } from 'lodash'
+import { useRouter } from 'next/navigation'
+import { CategoricalChartState } from 'recharts/types/chart/types'
 
 const chartConfig = {
   count: {
@@ -28,6 +30,8 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
   const [chartData, setChartData] = useState<any>([])
   const [dataChunk, setDataChunk] = useState(1)
   const [isStillMore, setIsStillMore] = useState(true)
+
+  const router = useRouter()
 
   useEffect(() => {
     // const filtered = reject(setSongs, { tourid: '61' })
@@ -47,6 +51,16 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
     setIsStillMore(displayedSongLength < songCountsObj.length)
   }, [setSongs, dataChunk])
 
+  const songClicked = ({ index }: { index: number }) => {
+    router.push(`/song/${chartData[index].id}`)
+  }
+
+  const chartClicked = ({ activeTooltipIndex }: CategoricalChartState) => {
+    if (activeTooltipIndex || activeTooltipIndex === 0) {
+      router.push(`/song/${chartData[activeTooltipIndex].id}`)
+    }
+  }
+
   return (
     <Card>
       <StatCardHeader Icon={MusicIcon}>Top 15 Songs</StatCardHeader>
@@ -57,6 +71,7 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
           style={{ height: `${dataChunk * 500}px` }}
         >
           <BarChart
+            onClick={chartClicked}
             accessibilityLayer
             data={chartData}
             layout='vertical'
@@ -66,6 +81,8 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
           >
             <XAxis type='number' dataKey='count' hide />
             <YAxis
+              className='cursor-pointer'
+              onClick={songClicked}
               dataKey='name'
               type='category'
               tickLine={false}
@@ -77,7 +94,12 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey='count' fill='var(--color-count)' radius={5} />
+            <Bar
+              className='cursor-pointer'
+              dataKey='count'
+              fill='var(--color-count)'
+              radius={5}
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>
