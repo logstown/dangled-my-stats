@@ -51,7 +51,7 @@ export default async function VenuePage({
     <div>
       <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
         <div className='pl-6 drop-shadow-2xl'>
-          <h1 className='mb-2 max-w-[700px] text-5xl font-bold tracking-tight'>
+          <h1 className='max-w-[700px] bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-5xl font-bold tracking-tight text-transparent'>
             {venue.venuename}
           </h1>
           <h3 className='ml-2 font-light'>

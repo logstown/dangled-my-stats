@@ -5,7 +5,9 @@ export default function WeirdLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Navbar />
-      <div className='px-4 pt-8 sm:px-8 md:px-16 md:pt-16'>{children}</div>
+      <div className='dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative w-full bg-white px-4 pt-8 dark:bg-black sm:px-8 md:px-16 md:py-16'>
+        {children}
+      </div>
     </>
   )
 }
