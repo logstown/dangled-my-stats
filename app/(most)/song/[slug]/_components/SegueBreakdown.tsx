@@ -37,6 +37,35 @@ const chartConfig = {
   },
 } satisfies ChartConfig as any
 
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  name,
+}: any) => {
+  const RADIAN = Math.PI / 180
+  // eslint-disable-next-line
+  const radius = 25 + innerRadius + (outerRadius - innerRadius)
+  // eslint-disable-next-line
+  const x = cx + radius * Math.cos(-midAngle * RADIAN)
+  // eslint-disable-next-line
+  const y = cy + radius * Math.sin(-midAngle * RADIAN)
+  return (
+    <text
+      className='sm:text-xl'
+      x={x}
+      y={y}
+      fill={chartConfig[name].color}
+      textAnchor={x > cx ? 'start' : 'end'}
+      dominantBaseline='central'
+    >
+      {chartConfig[name].label}
+    </text>
+  )
+}
+
 export function SegueBreakdown({ setSongs }: { setSongs: SetSong[] }) {
   const data = useMemo(() => {
     const counts = countBy(setSongs, 'transition')
@@ -88,7 +117,7 @@ export function SegueBreakdown({ setSongs }: { setSongs: SetSong[] }) {
               paddingAngle={5}
               startAngle={180}
               endAngle={0}
-              label={({ name }) => chartConfig[name].label}
+              label={renderCustomizedLabel}
             />
           </PieChart>
         </ChartContainer>
