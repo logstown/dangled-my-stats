@@ -70,7 +70,7 @@ const renderCustomizedLabel = ({
   const y = cy + radius * Math.sin(-midAngle * RADIAN)
   return (
     <text
-      className='sm:text-xl'
+      className='text-base'
       x={x}
       y={y}
       fill={chartConfig[name].color}
@@ -95,11 +95,8 @@ export function SetBreakdown({ setSongs }: { setSongs: SetSong[] }) {
   return (
     <Card className='flex flex-col'>
       <StatCardHeader Icon={ListMusicIcon}>Set Distribution</StatCardHeader>
-      <CardContent className='flex-1 pb-0'>
-        <ChartContainer
-          config={chartConfig}
-          style={{ height: '250px', width: '100%' }}
-        >
+      <CardContent className='px-0 pb-0'>
+        <ChartContainer config={chartConfig} className='h-[250px] w-full'>
           <PieChart>
             <ChartTooltip
               cursor={false}
@@ -109,9 +106,9 @@ export function SetBreakdown({ setSongs }: { setSongs: SetSong[] }) {
               data={data}
               dataKey='value'
               nameKey='name'
-              cy={190}
-              innerRadius={100}
-              outerRadius={150}
+              cy={180}
+              innerRadius={'60%'}
+              outerRadius={'100%'}
               paddingAngle={5}
               startAngle={180}
               endAngle={0}

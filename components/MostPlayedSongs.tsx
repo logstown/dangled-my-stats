@@ -95,6 +95,7 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
               content={<ChartTooltipContent hideLabel />}
             />
             <Bar
+              label={{ fill: 'white' }}
               className='cursor-pointer'
               dataKey='count'
               fill='var(--color-count)'

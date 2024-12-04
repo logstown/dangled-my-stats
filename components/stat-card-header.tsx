@@ -10,7 +10,7 @@ export function StatCardHeader({
 }) {
   return (
     <CardHeader>
-      <CardTitle className='flex items-center gap-4'>
+      <CardTitle className='flex items-center gap-3 sm:gap-4'>
         <Icon size={20} className='text-neutral-400' />
         {children}
       </CardTitle>

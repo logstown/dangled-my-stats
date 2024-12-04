@@ -55,7 +55,7 @@ export default async function SongPage({
           <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
         </div>
         <Card className='p-6'>
-          <div className='flex items-center gap-8'>
+          <div className='flex items-center gap-4 sm:gap-8'>
             <div>
               <div className='flex items-baseline justify-end'>
                 <span className='font-bold text-zinc-500'>Debut:</span>
@@ -66,7 +66,9 @@ export default async function SongPage({
                 </Button>
               </div>
               <div className='flex items-baseline justify-end'>
-                <span className='font-bold text-zinc-500'>Last Played:</span>
+                <span className='whitespace-nowrap font-bold text-zinc-500'>
+                  Last Played:
+                </span>
                 <Button asChild variant='link'>
                   <Link href={song.last_permalink} target='_blank'>
                     {song.last_played}

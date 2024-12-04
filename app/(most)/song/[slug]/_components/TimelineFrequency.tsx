@@ -98,7 +98,7 @@ export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
               dataKey='timesPlayed'
               tickLine={false}
               axisLine={false}
-              width={25}
+              width={15}
               allowDecimals={false}
             />
             <ChartTooltip

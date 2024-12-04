@@ -83,11 +83,12 @@ export function MostPlayedVenues({ setSongs }: { setSongs: SetSong[] }) {
               axisLine={false}
               width={200}
             />
-            <ChartTooltip
+            {/* <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
-            />
+            /> */}
             <Bar
+              label={{ fill: 'white' }}
               className='cursor-pointer'
               dataKey='count'
               fill='var(--color-count)'
