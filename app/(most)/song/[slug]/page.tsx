@@ -13,6 +13,7 @@ import { MostPlayedTours } from './_components/MostPlayedTours'
 import ShowTimeline from '@/components/Timeline'
 import { Card } from '@/components/ui/card'
 import { MusicIcon } from 'lucide-react'
+import { SlideUpWrapper } from '@/components/slide-up-wrapper'
 
 // average length
 
@@ -44,7 +45,7 @@ export default async function SongPage({
   )
 
   return (
-    <div>
+    <SlideUpWrapper>
       <div className='flex flex-wrap items-center justify-center gap-8 pb-12 sm:justify-between'>
         <div className='flex flex-col items-center gap-4 pl-6 drop-shadow-2xl sm:flex-row sm:items-baseline'>
           <MusicIcon size={30} className='text-neutral-400' />
@@ -111,6 +112,6 @@ export default async function SongPage({
           </div>
         </div>
       </div>
-    </div>
+    </SlideUpWrapper>
   )
 }

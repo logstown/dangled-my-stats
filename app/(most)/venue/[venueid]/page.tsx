@@ -11,6 +11,7 @@ import { LastPlays } from '@/components/LastPlays'
 import { MostPlayedSongs } from '@/components/MostPlayedSongs'
 import { Card } from '@/components/ui/card'
 import { TicketIcon } from 'lucide-react'
+import { SlideUpWrapper } from '@/components/slide-up-wrapper'
 
 export default async function VenuePage({
   params,
@@ -49,7 +50,7 @@ export default async function VenuePage({
   // Total length of songs played
 
   return (
-    <div>
+    <SlideUpWrapper>
       <div className='flex flex-wrap items-center justify-center gap-8 pb-12 sm:justify-between'>
         <div className='flex flex-col items-center gap-4 pl-6 drop-shadow-2xl sm:flex-row sm:items-baseline'>
           <TicketIcon size={30} className='text-neutral-400' />
@@ -109,6 +110,6 @@ export default async function VenuePage({
         <ShowTimeline showSongs={venueShowsSongs} shouldDisplayDate />
         <VenueTours venueSongs={setVenues} />
       </div>
-    </div>
+    </SlideUpWrapper>
   )
 }
