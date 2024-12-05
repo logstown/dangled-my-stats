@@ -15,6 +15,7 @@ import { Debuts } from '@/components/Debuts'
 import { LastPlays } from '@/components/LastPlays'
 import { MostPlayedSongs } from '@/components/MostPlayedSongs'
 import { Card } from '@/components/ui/card'
+import { BusIcon } from 'lucide-react'
 
 export default async function VenuePage({
   params,
@@ -42,11 +43,16 @@ export default async function VenuePage({
   return (
     <div>
       <div className='flex flex-wrap items-center justify-center gap-8 pb-12 sm:justify-between'>
-        <div className='pl-6 drop-shadow-2xl'>
-          <h1 className='max-w-[700px] bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-center text-5xl font-bold tracking-tight text-transparent sm:text-left'>
-            {tourName}
-          </h1>
-          <h3 className='text-center font-light sm:ml-2 sm:text-left'>{tourWhen}</h3>
+        <div className='flex flex-col items-center gap-4 pl-6 drop-shadow-2xl sm:flex-row sm:items-baseline'>
+          <BusIcon size={30} className='text-neutral-400' />
+          <div>
+            <h1 className='max-w-[700px] bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-center text-5xl font-bold tracking-tight text-transparent sm:text-left'>
+              {tourName}
+            </h1>
+            <h3 className='text-center font-light sm:ml-2 sm:text-left'>
+              {tourWhen}
+            </h3>
+          </div>
         </div>
         <Card className='w-full p-6 sm:w-fit'>
           <div className='flex items-center justify-evenly gap-4 sm:gap-8'>
@@ -83,7 +89,6 @@ export default async function VenuePage({
         </Card>
       </div>
       <div className='flex flex-col gap-16'>
-        <ShowTimeline showSongs={tourShowsSongs} />
         <div className='flex flex-col gap-8 lg:flex-row'>
           <div className='w-full lg:w-1/2'>
             <Debuts setSongs={phishTourSongs} />
@@ -92,6 +97,7 @@ export default async function VenuePage({
             <LastPlays setSongs={phishTourSongs} />
           </div>
         </div>
+        <ShowTimeline showSongs={tourShowsSongs} />
         <MostPlayedSongs setSongs={phishTourSongs} />
       </div>
     </div>
