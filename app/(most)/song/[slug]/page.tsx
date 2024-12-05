@@ -44,18 +44,20 @@ export default async function SongPage({
 
   return (
     <div>
-      <div className='flex flex-wrap items-center justify-between gap-8 pb-12'>
+      <div className='flex flex-wrap items-center justify-center gap-8 pb-12 sm:justify-between'>
         <div className='pl-6 drop-shadow-2xl'>
-          <h1 className='max-w-[700px] bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-5xl font-bold tracking-tight text-transparent'>
+          <h1 className='max-w-[700px] bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-center text-5xl font-bold tracking-tight text-transparent sm:text-left'>
             {song.song}
             {song.abbr && (
               <span className='ml-2 text-xl font-normal'>({song.abbr})</span>
             )}
           </h1>
-          <h3 className='ml-2 font-light'>Original Artist: {song.artist}</h3>
+          <h3 className='text-center font-light sm:ml-2 sm:text-left'>
+            Original Artist: {song.artist}
+          </h3>
         </div>
-        <Card className='p-6'>
-          <div className='flex items-center gap-4 sm:gap-8'>
+        <Card className='w-full p-6 sm:w-fit'>
+          <div className='flex items-center justify-evenly gap-4 sm:gap-8'>
             <div>
               <div className='flex items-baseline justify-end'>
                 <span className='font-bold text-zinc-500'>Debut:</span>
