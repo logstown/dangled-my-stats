@@ -44,9 +44,7 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
     }
 
     const arr = pathname.split('/')
-
-    const newPathAt =
-      arr[1] === 'browse' ? arr[2].substring(0, arr[2].length - 1) : arr[1]
+    const newPathAt = arr[2] ? arr[1] : arr[1].substring(0, arr[1].length - 1)
 
     if (newPathAt === pathAt) return
 

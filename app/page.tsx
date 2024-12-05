@@ -11,12 +11,12 @@ export default function HomePage() {
       <div className='flex h-full flex-col items-center justify-center gap-5 sm:gap-10'>
         <div className='flex flex-col items-center gap-1 sm:gap-2 lg:gap-3'>
           <h1
-            className={`${shirkhand.className} bg-gradient-to-br from-primary to-teal-500 bg-clip-text text-4xl leading-none tracking-tight text-transparent drop-shadow-2xl md:text-5xl xl:text-7xl`}
+            className={`${shirkhand.className} bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text text-4xl leading-none tracking-tight text-transparent drop-shadow-2xl md:text-5xl xl:text-7xl`}
           >
             Dangled My Stats
           </h1>
           <h3 className='sm:tex-base text-sm text-neutral-500 lg:text-xl'>
-            Phish data
+            Data concerning the Phish from Vermont
           </h3>
         </div>
         <div className='px-10'>
@@ -35,7 +35,7 @@ export default function HomePage() {
             variant='link'
             className='w-full px-8 py-6 text-lg sm:w-auto'
           >
-            <Link href='/browse/songs'>Songs</Link>
+            <Link href='/songs'>Songs</Link>
           </Button>
           <Button
             asChild
@@ -43,7 +43,7 @@ export default function HomePage() {
             variant='link'
             className='w-full px-8 py-6 text-lg sm:w-auto'
           >
-            <Link href='/browse/venues'>Venues</Link>
+            <Link href='/venues'>Venues</Link>
           </Button>
           <Button
             asChild
@@ -51,7 +51,7 @@ export default function HomePage() {
             variant='link'
             className='w-full px-8 py-6 text-lg sm:w-auto'
           >
-            <Link href='/browse/tours'>Tours</Link>
+            <Link href='/tours'>Tours</Link>
           </Button>
           <div className='sm:ml-6'>
             <SearchAllServer />

@@ -48,7 +48,7 @@ export function NavSheet() {
         <NavigationMenu orientation='horizontal'>
           <NavigationMenuList className='flex-col items-start space-x-0'>
             <NavigationMenuItem>
-              <Link href='/browse/songs' legacyBehavior passHref>
+              <Link href='/songs' legacyBehavior passHref>
                 <NavigationMenuLink
                   onClick={() => setOpen(false)}
                   className={navigationMenuTriggerStyle()}
@@ -58,7 +58,7 @@ export function NavSheet() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href='/browse/venues' legacyBehavior passHref>
+              <Link href='/venues' legacyBehavior passHref>
                 <NavigationMenuLink
                   onClick={() => setOpen(false)}
                   className={navigationMenuTriggerStyle()}
@@ -68,7 +68,7 @@ export function NavSheet() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href='/browse/tours' legacyBehavior passHref>
+              <Link href='/tours' legacyBehavior passHref>
                 <NavigationMenuLink
                   onClick={() => setOpen(false)}
                   className={navigationMenuTriggerStyle()}
