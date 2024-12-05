@@ -69,7 +69,7 @@ export function TimelineFrequency({ setSongs }: { setSongs: SetSong[] }) {
       </CardHeader>
       <CardContent>
         <ChartContainer
-          style={{ height: '350px', width: '100%' }}
+          style={{ height: '300px', width: '100%' }}
           config={chartConfig}
         >
           <AreaChart
