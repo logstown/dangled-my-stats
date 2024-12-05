@@ -54,7 +54,7 @@ const renderCustomizedLabel = ({
   const y = cy + radius * Math.sin(-midAngle * RADIAN)
   return (
     <text
-      className='text-base'
+      className='sm:text-base'
       x={x}
       y={y}
       fill={chartConfig[name].color}
