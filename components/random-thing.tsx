@@ -73,14 +73,15 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
         break
       case 'tour':
         router.push(`/tour/${thing.tourid}`)
+        break
     }
   }
 
-  return (
+  return pathname === '/about' ? null : (
     <Button
       disabled={isLoading}
       variant='ghost'
-      className='capitalize'
+      className='text-base capitalize'
       onClick={goToRandom}
     >
       {pathAt}

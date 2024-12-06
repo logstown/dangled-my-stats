@@ -5,6 +5,7 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -20,6 +21,7 @@ import {
 import Link from 'next/link'
 import { useState } from 'react'
 import { RandomThing } from './random-thing'
+import Image from 'next/image'
 
 export function NavSheet() {
   const [open, setOpen] = useState(false)
@@ -42,10 +44,10 @@ export function NavSheet() {
         aria-description='navigation'
       >
         <SheetHeader>
-          <SheetTitle>Browse</SheetTitle>
-          <SheetDescription className='hidden'>dummy</SheetDescription>
+          <SheetTitle>Navigation</SheetTitle>
+          <SheetDescription className='hidden'>Browse</SheetDescription>
         </SheetHeader>
-        <NavigationMenu orientation='horizontal'>
+        <NavigationMenu orientation='vertical'>
           <NavigationMenuList className='flex-col items-start space-x-0'>
             <NavigationMenuItem>
               <Link href='/songs' legacyBehavior passHref>
@@ -80,13 +82,18 @@ export function NavSheet() {
             <NavigationMenuItem>
               <RandomThing onClick={() => setOpen(false)} />
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href='/about' legacyBehavior passHref>
+                <NavigationMenuLink
+                  onClick={() => setOpen(false)}
+                  className={navigationMenuTriggerStyle()}
+                >
+                  About
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        {/* <SheetFooter>
-          <SheetClose asChild>
-            <Button type='submit'>Save changes</Button>
-          </SheetClose>
-        </SheetFooter> */}
       </SheetContent>
     </Sheet>
   )
