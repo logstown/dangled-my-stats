@@ -21,17 +21,17 @@ export async function Navbar() {
     {
       name: 'Songs',
       href: '/songs',
-      icon: <MusicIcon className='text-neutral-500' />,
+      icon: <MusicIcon size={18} />,
     },
     {
       name: 'Venues',
       href: '/venues',
-      icon: <TicketIcon className='text-neutral-500' />,
+      icon: <TicketIcon size={18} />,
     },
     {
       name: 'Tours',
       href: '/tours',
-      icon: <BusIcon className='text-neutral-500' />,
+      icon: <BusIcon size={18} />,
     },
   ]
 
@@ -40,7 +40,7 @@ export async function Navbar() {
       <div className='md:hidden'>
         <NavSheet />
       </div>
-      <div className='flex items-center gap-20'>
+      <div className='flex items-center gap-16'>
         <Link href='/' className='flex items-end gap-6'>
           <Image
             src='/ai-thing.png'
@@ -49,13 +49,15 @@ export async function Navbar() {
             height={35}
             alt='thing'
           />
-          <span className={` ${shirkhand.className} text-2xl text-secondary`}>
+          <span
+            className={` ${shirkhand.className} whitespace-nowrap text-2xl text-secondary`}
+          >
             Dangled My Stats
           </span>
         </Link>
         <NavigationMenu className='hidden md:block'>
           <NavigationMenuList className='flex-row'>
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <NavigationMenuTrigger className='bg-primary text-base text-primary-foreground'>
                 Browse
               </NavigationMenuTrigger>
@@ -81,8 +83,23 @@ export async function Navbar() {
                   })}
                 </ul>
               </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
+            </NavigationMenuItem> */}
+            {links.map(x => (
+              <NavigationMenuItem key={x.name}>
+                <Link href={x.href} legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={
+                      navigationMenuTriggerStyle() +
+                      ' items-center gap-2 bg-primary !text-base text-primary-foreground'
+                    }
+                  >
+                    {x.icon}
+                    {x.name}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            ))}
+            <NavigationMenuItem className='pl-6'>
               <Link href='/about' legacyBehavior passHref>
                 <NavigationMenuLink
                   className={
