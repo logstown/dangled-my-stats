@@ -16,7 +16,7 @@ export default function HomePage() {
             Dangled My Stats
           </h1>
           <h3 className='sm:tex-base text-sm text-neutral-500 lg:text-xl'>
-            Data concerning the Phish from Vermont
+            Phish data for fun
           </h3>
         </div>
         <div className='px-10'>
