@@ -85,7 +85,6 @@ export default function AboutPage() {
               <Link
                 href='https://loganjoecks.com/'
                 target='_blank'
-                rel='noopener noreferrer'
                 className='flex items-center text-primary hover:underline'
               >
                 loganjoecks.com
