@@ -14,7 +14,10 @@ export default async function BrowseEntityPage({
 
   switch (entity) {
     case 'songs':
-      const { data: allSongs } = await getAllSongs()
+      const { data: allSongs, error } = await getAllSongs()
+      if (error) {
+        return 'Something went wrong'
+      }
       const allUniqueSongs = uniqBy(allSongs, 'songid')
       return <BrowseSongs songs={allUniqueSongs} />
     case 'venues':

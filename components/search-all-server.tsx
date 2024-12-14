@@ -4,6 +4,7 @@ import { SearchAll } from './search-all'
 
 export async function SearchAllServer({ isNavbar }: { isNavbar?: boolean }) {
   const allSongsResp = await getAllSongs()
+  if (allSongsResp.error) return
   const songs = uniqBy(allSongsResp.data, 'songid')
 
   const allVenuesResp = await getAllVenues()

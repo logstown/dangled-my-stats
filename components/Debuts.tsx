@@ -8,7 +8,11 @@ import { ListPlusIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export async function Debuts({ setSongs }: { setSongs: SetSong[] }) {
-  const { data: allSongs } = await getAllSongs()
+  const { data: allSongs, error } = await getAllSongs()
+
+  if (error) {
+    return
+  }
 
   const debuts = reduce(
     setSongs,

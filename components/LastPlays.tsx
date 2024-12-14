@@ -8,7 +8,8 @@ import { HandIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export async function LastPlays({ setSongs }: { setSongs: SetSong[] }) {
-  const { data: allSongs } = await getAllSongs()
+  const { data: allSongs, error } = await getAllSongs()
+  if (error) return
 
   const lastPlayed = reduce(
     setSongs,

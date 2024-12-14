@@ -49,5 +49,8 @@ const fetchFn = async (urlFrag: string, next: NextFetchRequestConfig = {}) => {
     next,
   })
     .then(response => response.json())
-    .catch(err => console.error(err))
+    .catch(err => {
+      console.log(err)
+      // console.error(err)
+    })
 }

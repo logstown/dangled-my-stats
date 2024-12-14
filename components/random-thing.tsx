@@ -19,9 +19,10 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
   const getEntities = (pathAt: string): Promise<any> => {
     switch (pathAt) {
       case 'song':
-        return getAllSongs().then(({ data }) =>
-          filter(data, x => Number(x.times_played) > 1),
-        )
+        return getAllSongs().then(resp => {
+          if (!resp) return []
+          return filter(resp.data, x => Number(x.times_played) > 1)
+        })
       case 'venue':
         return getAllShows().then(({ data: allShows }) => {
           const allStatsShows = filter(allShows, { exclude_from_stats: 0 })
