@@ -44,13 +44,18 @@ export const getSongDetail = async (songSlug: string): Promise<SongDetail> => {
 }
 
 const fetchFn = async (urlFrag: string, next: NextFetchRequestConfig = {}) => {
-  return fetch(`https://api.phish.net/v5/${urlFrag}?apikey=BAFDD2FDAAC82574746F`, {
-    method: 'GET',
-    next,
-  })
-    .then(response => response.json())
-    .catch(err => {
-      console.log(err)
-      // console.error(err)
-    })
+  try {
+    const resp = await fetch(
+      `https://api.phish.net/v5/${urlFrag}?apikey=BAFDD2FDAAC82574746F`,
+      {
+        method: 'GET',
+        next,
+      },
+    )
+
+    const jsonResp = await resp.json()
+    return jsonResp
+  } catch (e) {
+    console.log(e)
+  }
 }
