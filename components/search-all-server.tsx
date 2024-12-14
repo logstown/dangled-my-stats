@@ -13,7 +13,7 @@ export async function SearchAllServer({ isNavbar }: { isNavbar?: boolean }) {
   }))
 
   const allShowsResp = await getAllShows()
-  const tours = uniqBy(allShowsResp.data, 'tourid').filter(x => x.tourid !== '61')
+  const tours = uniqBy(allShowsResp.data, 'tourid').filter(x => x.tourid !== 61)
 
   return (
     <SearchAll

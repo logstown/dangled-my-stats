@@ -10,7 +10,7 @@ export function BrowseTours({ shows }: { shows: Show[] }) {
   const toursByCategory = useMemo(() => {
     let grouped = groupBy(shows, 'showyear')
     grouped = mapValues(grouped, shows =>
-      uniqBy(shows, 'tourid').filter(x => x.tourid !== '61'),
+      uniqBy(shows, 'tourid').filter(x => x.tourid !== 61),
     )
 
     const toursByCat = map(grouped, (tours: Show[], year: string) => {

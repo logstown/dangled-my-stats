@@ -24,13 +24,13 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
         )
       case 'venue':
         return getAllShows().then(({ data: allShows }) => {
-          const allStatsShows = filter(allShows, { exclude_from_stats: '0' })
+          const allStatsShows = filter(allShows, { exclude_from_stats: 0 })
           const byVenueId = groupBy(allStatsShows, 'venueid')
           return map(byVenueId, x => x[0])
         })
       case 'tour':
         return getAllShows().then(({ data }) =>
-          uniqBy(data, 'tourid').filter(x => x.tourid !== '61'),
+          uniqBy(data, 'tourid').filter(x => x.tourid !== 61),
         )
       default:
         console.warn('wrong path')

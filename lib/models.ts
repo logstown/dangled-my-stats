@@ -79,22 +79,22 @@ export interface VenueBrowse extends Venue {
 }
 
 export type Show = {
-  showid: string
+  showid: number
   showyear: string
-  showmonth: string
-  showday: string
+  showmonth: number
+  showday: number
   showdate: string
   permalink: string
-  exclude_from_stats: string
-  venueid: string
+  exclude_from_stats: number
+  venueid: number
   setlist_notes: string
   venue: string
   city: string
   state: string
   country: string
-  artistid: string
+  artistid: number
   artist_name: string
-  tourid: string
+  tourid: number
   tour_name: string
   created_at: string
   updated_at: string
