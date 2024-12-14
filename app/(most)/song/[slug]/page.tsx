@@ -35,13 +35,11 @@ export default async function SongPage({
     notFound()
   }
 
-  const mostPlayedSongCount = maxBy(allSongs, x =>
-    Number(x.times_played),
-  )!.times_played
+  const mostPlayedSongCount = maxBy(allSongs, 'times_played')!.times_played
 
   const setSongsResponse = await getSongFromSets(slug)
   const setSongs = filter(setSongsResponse.data, { artist_slug: 'phish' }).filter(
-    x => x.exclude === '0',
+    x => x.exclude === 0,
   )
 
   return (
@@ -85,8 +83,8 @@ export default async function SongPage({
             </div>
             <div>
               <TimesPlayed
-                timesPlayed={Number(song.times_played)}
-                mostPlayedSongCount={Number(mostPlayedSongCount)}
+                timesPlayed={song.times_played}
+                mostPlayedSongCount={mostPlayedSongCount}
               />
             </div>
           </div>

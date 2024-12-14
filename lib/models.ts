@@ -1,53 +1,53 @@
 export type Song = {
-  songid: string
+  songid: number
   song: string
   slug: string
   abbr: string
   artist: string
   debut: string
   last_played: string
-  times_played: string
+  times_played: number
   last_permalink: string
   debut_permalink: string
-  gap: string
+  gap: number
 }
 
 export type SetSong = {
-  showid: string
+  showid: number
   showdate: string
   permalink: string
   showyear: string
-  uniqueid: string
+  uniqueid: number
   meta: string
   reviews: string
-  exclude: string
+  exclude: number
   setlistnotes: string
   soundcheck: string
-  songid: string
-  position: string
-  transition: string
+  songid: number
+  position: number
+  transition: number
   footnote: string
   set: string
-  isjam: string
-  isreprise: string
-  isjamchart: string
+  isjam: number
+  isreprise: number
+  isjamchart: number
   jamchart_description: string
   tracktime: any
-  gap: string
-  tourid: string
+  gap: number
+  tourid: number
   tourname: string
   tourwhen: string
   song: string
   nickname: string
   slug: string
-  is_original: string
-  venueid: string
+  is_original: number
+  venueid: number
   venue: string
   city: string
   state: string
   country: string
   trans_mark: string
-  artistid: string
+  artistid: number
   artist_slug: string
   artist_name: string
 }
@@ -63,13 +63,13 @@ export type SongDetail = {
 }
 
 export type Venue = {
-  venueid: string
+  venueid: number
   venuename: string
   city: string
   state: string
   country: string
   venuenotes: string
-  alias: string
+  alias: number
   short_name: string
 }
 

@@ -29,7 +29,9 @@ export function MostPlayedVenues({ setSongs }: { setSongs: SetSong[] }) {
   const data = useMemo(() => {
     const venueCounts = countBy(setSongs, 'venueid')
     let venueCountsObj = map(venueCounts, (count, venueid) => {
-      const { venue, city, state, country } = find(setSongs, { venueid })!
+      const { venue, city, state, country } = find(setSongs, {
+        venueid: Number(venueid),
+      })!
 
       return {
         count,

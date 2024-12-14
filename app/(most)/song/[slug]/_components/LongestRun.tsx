@@ -11,15 +11,15 @@ export function LongestRun({ setSongs }: { setSongs: SetSong[] }) {
       setSong,
       i,
     ) => {
-      if (setSong.gap === '1') {
+      if (setSong.gap === 1) {
         currentRun.push(setSong)
-      } else if (setSongs[i - 1]?.gap === '1') {
+      } else if (setSongs[i - 1]?.gap === 1) {
         if (currentRun.length > longestRun.length) {
           longestRun = cloneDeep(currentRun)
         }
 
         currentRun = []
-      } else if (setSongs[i + 1]?.gap === '1') {
+      } else if (setSongs[i + 1]?.gap === 1) {
         currentRun.push(setSong)
       }
 

@@ -25,7 +25,7 @@ export default async function VenuePage({
   }
 
   const { venueid } = await params
-  const venue = find(allVenues, { venueid })
+  const venue = find(allVenues, { venueid: Number(venueid) })
 
   if (!venue) {
     notFound()
@@ -33,7 +33,7 @@ export default async function VenuePage({
 
   const setVenueResponse = await getVenueSetSongs(venueid)
   const setVenues = filter(setVenueResponse.data, { artist_slug: 'phish' }).filter(
-    x => x.exclude === '0',
+    x => x.exclude === 0,
   )
 
   const venueShowsSongs = uniqBy(setVenues, 'showid')

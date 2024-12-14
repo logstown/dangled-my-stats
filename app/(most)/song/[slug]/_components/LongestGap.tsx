@@ -6,7 +6,7 @@ import { StatCardHeader } from '@/components/stat-card-header'
 
 export function LongestGap({ setSongs }: { setSongs: SetSong[] }) {
   let gapShows: SetSong[] = []
-  const gapNextShow = maxBy(tail(setSongs), x => Number(x.gap))
+  const gapNextShow = maxBy(tail(setSongs), 'gap')
 
   if (gapNextShow) {
     const idx = findIndex(setSongs, { uniqueid: gapNextShow.uniqueid })

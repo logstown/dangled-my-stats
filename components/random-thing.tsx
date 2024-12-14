@@ -21,7 +21,7 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
       case 'song':
         return getAllSongs().then(resp => {
           if (!resp) return []
-          return filter(resp.data, x => Number(x.times_played) > 1)
+          return filter(resp.data, x => x.times_played > 1)
         })
       case 'venue':
         return getAllShows().then(({ data: allShows }) => {
@@ -34,7 +34,6 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
           uniqBy(data, 'tourid').filter(x => x.tourid !== 61),
         )
       default:
-        console.warn('wrong path')
         return Promise.resolve()
     }
   }
@@ -61,6 +60,10 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
   const goToRandom = () => {
     if (onClick) {
       onClick()
+    }
+
+    if (!entities.current) {
+      return
     }
 
     const thing = getRandomFromArray(entities.current)

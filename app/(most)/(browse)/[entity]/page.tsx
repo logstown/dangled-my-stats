@@ -29,7 +29,7 @@ export default async function BrowseEntityPage({
       const allStatsShows = filter(allShows, { exclude_from_stats: 0 })
       const counts = countBy(allStatsShows, 'venueid')
       const venues = map(counts, (count, venueid) => {
-        const foundVenue = find(allVenues, { venueid })!
+        const foundVenue = find(allVenues, { venueid: Number(venueid) })!
 
         return {
           ...foundVenue,

@@ -28,10 +28,10 @@ export function MostPlayedTours({ setSongs }: { setSongs: SetSong[] }) {
   const router = useRouter()
 
   const data = useMemo(() => {
-    const filtered = reject(setSongs, { tourid: '61' })
+    const filtered = reject(setSongs, { tourid: 61 })
     const tourCounts = countBy(filtered, 'tourid')
     let tourCountsObj = map(tourCounts, (count, tourid) => {
-      const tourShow = find(setSongs, { tourid })!
+      const tourShow = find(setSongs, { tourid: Number(tourid) })!
 
       return {
         id: tourid,
@@ -49,7 +49,6 @@ export function MostPlayedTours({ setSongs }: { setSongs: SetSong[] }) {
   }
 
   const chartClicked = ({ activeTooltipIndex }: CategoricalChartState) => {
-    console.log(activeTooltipIndex)
     if (activeTooltipIndex || activeTooltipIndex === 0) {
       router.push(`/tour/${data[activeTooltipIndex].id}`)
     }

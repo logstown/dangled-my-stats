@@ -40,7 +40,7 @@ const ShowTimeline = ({
       cluster: {},
     })
 
-    timelineRef.current.on('select', ({ items }: { items: string[] }) => {
+    timelineRef.current.on('select', ({ items }: { items: number[] }) => {
       const setSong = find(showSongs, { uniqueid: items[0] })
       if (setSong) {
         window.open(setSong.permalink, '_blank')
