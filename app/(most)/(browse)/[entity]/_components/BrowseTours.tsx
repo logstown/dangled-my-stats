@@ -8,7 +8,11 @@ import { useMemo } from 'react'
 
 export function BrowseTours({ shows }: { shows: Show[] }) {
   const toursByCategory = useMemo(() => {
-    let grouped = groupBy(shows, 'showyear')
+    const pastShows = shows.filter(
+      x => new Date(x.showdate).getTime() < new Date().getTime(),
+    )
+
+    let grouped = groupBy(pastShows, 'showyear')
     grouped = mapValues(grouped, shows =>
       uniqBy(shows, 'tourid').filter(x => x.tourid !== 61),
     )
