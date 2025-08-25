@@ -1,4 +1,1 @@
-- Create sidebar drawer thing for menu
-- make text larger for pie charts
-- evrything you click needs to be a link
-- make everything mobile friendly
+
