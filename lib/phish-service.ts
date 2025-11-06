@@ -46,9 +46,13 @@ export const getSongDetail = async (songSlug: string): Promise<SongDetail> => {
 const fetchFn = async (urlFrag: string, next: NextFetchRequestConfig = {}) => {
   const apiKey = process.env.PHISHNET_API_KEY
 
+  if (!apiKey) {
+    throw new Error('PHISHNET_API_KEY environment variable is not set')
+  }
+
   try {
     const resp = await fetch(
-      `https://api.phish.net/v5/${urlFrag}?apikey=BAFDD2FDAAC82574746F`, // TODO: Temporary
+      `https://api.phish.net/v5/${urlFrag}?apikey=${apiKey}`,
       {
         method: 'GET',
         next,
