@@ -18,7 +18,7 @@ import { StatCardHeader } from '@/components/stat-card-header'
 import { Button } from './ui/button'
 import { take } from 'lodash'
 import { useRouter } from 'next/navigation'
-import { CategoricalChartFunc } from 'recharts/types/chart/types'
+import { CategoricalChartState } from 'recharts/types/chart/types'
 
 const chartConfig = {
   count: {
@@ -56,9 +56,9 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
     router.push(`/song/${chartData[index].id}`)
   }
 
-  const chartClicked: CategoricalChartFunc = ({ activeTooltipIndex }) => {
+  const chartClicked = ({ activeTooltipIndex }: CategoricalChartState) => {
     if (activeTooltipIndex || activeTooltipIndex === 0) {
-      router.push(`/song/${chartData[activeTooltipIndex as number].id}`)
+      router.push(`/song/${chartData[activeTooltipIndex].id}`)
     }
   }
 

@@ -16,7 +16,7 @@ import { countBy, find, map, sortBy, takeRight } from 'lodash'
 import { SetSong } from '@/lib/models'
 import { StatCardHeader } from '@/components/stat-card-header'
 import { useRouter } from 'next/navigation'
-import { CategoricalChartFunc } from 'recharts/types/chart/types'
+import { CategoricalChartState } from 'recharts/types/chart/types'
 
 const chartConfig = {
   count: {
@@ -55,9 +55,9 @@ export function MostPlayedVenues({ setSongs }: { setSongs: SetSong[] }) {
     router.push(`/venue/${data[index].venueid}`)
   }
 
-  const chartClicked: CategoricalChartFunc = ({ activeTooltipIndex }) => {
+  const chartClicked = ({ activeTooltipIndex }: CategoricalChartState) => {
     if (activeTooltipIndex || activeTooltipIndex === 0) {
-      router.push(`/venue/${data[activeTooltipIndex as number].venueid}`)
+      router.push(`/venue/${data[activeTooltipIndex].venueid}`)
     }
   }
 
