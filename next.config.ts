@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
   cacheHandler: require.resolve(
     'next/dist/server/lib/incremental-cache/file-system-cache.js',
   ),
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 }
 
 export default nextConfig
