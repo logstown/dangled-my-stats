@@ -18,26 +18,46 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
   const [isLoading, setIsLoading] = useState(false)
 
   const getEntities = async (pathAt: string): Promise<any> => {
-    switch (pathAt) {
-      case 'song':
-        const songsResp = await fetch('/api/songs')
-        const songsData: PhishResponse<Song> = await songsResp.json()
-        if (!songsData) return []
-        return filter(songsData.data, x => x.times_played > 1)
-      case 'venue':
-        const showsForVenueResp = await fetch('/api/shows')
-        const showsForVenueData: PhishResponse<Show> = await showsForVenueResp.json()
-        const allStatsShows = filter(showsForVenueData.data, {
-          exclude_from_stats: 0,
-        })
-        const byVenueId = groupBy(allStatsShows, 'venueid')
-        return map(byVenueId, x => x[0])
-      case 'tour':
-        const showsForTourResp = await fetch('/api/shows')
-        const showsForTourData: PhishResponse<Show> = await showsForTourResp.json()
-        return uniqBy(showsForTourData.data, 'tourid').filter(x => x.tourid !== 61)
-      default:
-        return Promise.resolve([])
+    try {
+      switch (pathAt) {
+        case 'song':
+          const songsResp = await fetch('/api/songs')
+          if (!songsResp.ok) {
+            console.error('Failed to fetch songs:', songsResp.status)
+            return []
+          }
+          const songsData: PhishResponse<Song> = await songsResp.json()
+          if (!songsData || songsData.error) return []
+          return filter(songsData.data, x => x.times_played > 1)
+        case 'venue':
+          const showsForVenueResp = await fetch('/api/shows')
+          if (!showsForVenueResp.ok) {
+            console.error('Failed to fetch shows:', showsForVenueResp.status)
+            return []
+          }
+          const showsForVenueData: PhishResponse<Show> =
+            await showsForVenueResp.json()
+          if (showsForVenueData.error) return []
+          const allStatsShows = filter(showsForVenueData.data, {
+            exclude_from_stats: 0,
+          })
+          const byVenueId = groupBy(allStatsShows, 'venueid')
+          return map(byVenueId, x => x[0])
+        case 'tour':
+          const showsForTourResp = await fetch('/api/shows')
+          if (!showsForTourResp.ok) {
+            console.error('Failed to fetch shows:', showsForTourResp.status)
+            return []
+          }
+          const showsForTourData: PhishResponse<Show> = await showsForTourResp.json()
+          if (showsForTourData.error) return []
+          return uniqBy(showsForTourData.data, 'tourid').filter(x => x.tourid !== 61)
+        default:
+          return Promise.resolve([])
+      }
+    } catch (error) {
+      console.error('Error fetching entities:', error)
+      return []
     }
   }
 
