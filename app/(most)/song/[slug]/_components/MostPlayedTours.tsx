@@ -16,7 +16,7 @@ import { countBy, find, map, reject, sortBy, takeRight } from 'lodash'
 import { SetSong } from '@/lib/models'
 import { StatCardHeader } from '@/components/stat-card-header'
 import { useRouter } from 'next/navigation'
-import { CategoricalChartState } from 'recharts/types/chart/types'
+import { CategoricalChartFunc } from 'recharts/types/chart/types'
 
 const chartConfig = {
   count: {
@@ -49,9 +49,9 @@ export function MostPlayedTours({ setSongs }: { setSongs: SetSong[] }) {
     router.push(`/tour/${data[index].id}`)
   }
 
-  const chartClicked = ({ activeTooltipIndex }: CategoricalChartState) => {
+  const chartClicked: CategoricalChartFunc = ({ activeTooltipIndex }) => {
     if (activeTooltipIndex || activeTooltipIndex === 0) {
-      router.push(`/tour/${data[activeTooltipIndex].id}`)
+      router.push(`/tour/${data[activeTooltipIndex as number].id}`)
     }
   }
 
