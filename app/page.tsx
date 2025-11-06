@@ -11,7 +11,7 @@ export default function HomePage() {
       <div className='flex h-full flex-col items-center justify-center gap-5 sm:gap-10'>
         <div className='flex flex-col items-center gap-1 sm:gap-2 lg:gap-3'>
           <h1
-            className={`${shirkhand.className} bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text text-4xl leading-none tracking-tight text-transparent drop-shadow-2xl md:text-5xl xl:text-7xl`}
+            className={`${shirkhand.className} bg-linear-to-br from-primary to-[#E76E50] bg-clip-text text-4xl leading-none tracking-tight text-transparent drop-shadow-2xl md:text-5xl xl:text-7xl`}
           >
             Dangled My Stats
           </h1>

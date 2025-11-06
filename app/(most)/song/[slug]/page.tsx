@@ -44,7 +44,7 @@ export default async function SongPage({
     <SlideUpWrapper>
       <div className='flex flex-wrap items-center justify-center gap-8 pb-12 sm:justify-between'>
         <div className='drop-shadow-2xl'>
-          <h1 className='max-w-[700px] bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-center text-5xl font-bold tracking-tight text-transparent sm:text-left'>
+          <h1 className='max-w-[700px] bg-linear-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-center text-5xl font-bold tracking-tight text-transparent sm:text-left'>
             <HtmlText>{song.song}</HtmlText>
             {song.abbr && (
               <HtmlText className='ml-2 text-xl font-normal'>{`(${song.abbr})`}</HtmlText>

@@ -70,7 +70,7 @@ export async function Navbar() {
                         <Link href={x.href} legacyBehavior passHref>
                           <NavigationMenuLink
                             className={
-                              '!w-full items-center !justify-start gap-2 !py-7 px-5 !text-base ' +
+                              'w-full! items-center justify-start! gap-2 py-7! px-5 text-base! ' +
                               navigationMenuTriggerStyle()
                             }
                           >
@@ -90,7 +90,7 @@ export async function Navbar() {
                   asChild
                   className={
                     navigationMenuTriggerStyle() +
-                    ' items-center gap-2 bg-primary !text-base text-primary-foreground'
+                    ' items-center gap-2 bg-primary text-base! text-primary-foreground'
                   }
                 >
                   <Link href={x.href}>
@@ -105,7 +105,7 @@ export async function Navbar() {
                 asChild
                 className={
                   navigationMenuTriggerStyle() +
-                  ' bg-primary !text-base text-primary-foreground'
+                  ' bg-primary text-base! text-primary-foreground'
                 }
               >
                 <Link href='/about'>About</Link>
