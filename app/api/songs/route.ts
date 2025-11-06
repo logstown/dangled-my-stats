@@ -2,9 +2,6 @@ import { getAllSongs } from '@/lib/phish-service'
 import { NextRequest, NextResponse } from 'next/server'
 import { checkRateLimit } from '@/lib/rate-limit'
 
-// Cache at the route level - revalidate every 24 hours
-export const revalidate = 60 * 60 * 24
-
 export async function GET(request: NextRequest) {
   // Check rate limit: 20 requests per minute per IP
   const { allowed, remaining, resetTime } = checkRateLimit(request, 20, 60000)
