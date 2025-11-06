@@ -109,7 +109,7 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
     <Button
       disabled={isLoading}
       variant='ghost'
-      className='text-base capitalize'
+      className='cursor-pointer text-base capitalize'
       onClick={goToRandom}
     >
       {pathAt}
