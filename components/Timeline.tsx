@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { DataSet, Timeline } from 'vis-timeline/standalone'
-// import { DataSet } from 'vis-data'
+import { Timeline } from 'vis-timeline/standalone'
+import { DataSet } from 'vis-data'
 import 'vis-timeline/styles/vis-timeline-graph2d.css'
 import { SetSong } from '@/lib/models'
 import { find } from 'lodash'
