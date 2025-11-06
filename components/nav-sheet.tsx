@@ -50,47 +50,43 @@ export function NavSheet() {
         <NavigationMenu orientation='vertical'>
           <NavigationMenuList className='flex-col items-start space-x-0'>
             <NavigationMenuItem>
-              <Link href='/songs' legacyBehavior passHref>
-                <NavigationMenuLink
-                  onClick={() => setOpen(false)}
-                  className={navigationMenuTriggerStyle()}
-                >
-                  Songs
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                asChild
+                onClick={() => setOpen(false)}
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href='/songs'>Songs</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href='/venues' legacyBehavior passHref>
-                <NavigationMenuLink
-                  onClick={() => setOpen(false)}
-                  className={navigationMenuTriggerStyle()}
-                >
-                  Venues
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                asChild
+                onClick={() => setOpen(false)}
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href='/venues'>Venues</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href='/tours' legacyBehavior passHref>
-                <NavigationMenuLink
-                  onClick={() => setOpen(false)}
-                  className={navigationMenuTriggerStyle()}
-                >
-                  Tours
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                asChild
+                onClick={() => setOpen(false)}
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href='/tours'>Tours</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <RandomThing onClick={() => setOpen(false)} />
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href='/about' legacyBehavior passHref>
-                <NavigationMenuLink
-                  onClick={() => setOpen(false)}
-                  className={navigationMenuTriggerStyle()}
-                >
-                  About
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                asChild
+                onClick={() => setOpen(false)}
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href='/about'>About</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

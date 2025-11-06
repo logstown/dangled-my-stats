@@ -86,30 +86,30 @@ export async function Navbar() {
             </NavigationMenuItem> */}
             {links.map(x => (
               <NavigationMenuItem key={x.name}>
-                <Link href={x.href} legacyBehavior passHref>
-                  <NavigationMenuLink
-                    className={
-                      navigationMenuTriggerStyle() +
-                      ' items-center gap-2 bg-primary !text-base text-primary-foreground'
-                    }
-                  >
+                <NavigationMenuLink
+                  asChild
+                  className={
+                    navigationMenuTriggerStyle() +
+                    ' items-center gap-2 bg-primary !text-base text-primary-foreground'
+                  }
+                >
+                  <Link href={x.href}>
                     {x.icon}
                     {x.name}
-                  </NavigationMenuLink>
-                </Link>
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
             <NavigationMenuItem className='pl-6'>
-              <Link href='/about' legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={
-                    navigationMenuTriggerStyle() +
-                    ' bg-primary !text-base text-primary-foreground'
-                  }
-                >
-                  About
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                asChild
+                className={
+                  navigationMenuTriggerStyle() +
+                  ' bg-primary !text-base text-primary-foreground'
+                }
+              >
+                <Link href='/about'>About</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
