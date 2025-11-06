@@ -12,7 +12,6 @@ import { MostPlayedVenues } from './_components/MostPlayedVenues'
 import { MostPlayedTours } from './_components/MostPlayedTours'
 import ShowTimeline from '@/components/Timeline'
 import { Card } from '@/components/ui/card'
-import { MusicIcon } from 'lucide-react'
 import { SlideUpWrapper } from '@/components/slide-up-wrapper'
 import { HtmlText } from '@/components/html-text'
 
@@ -38,13 +37,8 @@ export default async function SongPage({
 
   const mostPlayedSongCount = maxBy(allSongs, 'times_played')!.times_played
 
-  const setSongsResponse = await getSongFromSets(slug)
-  console.log(setSongsResponse.error, setSongsResponse.data[0])
-  const setSongs = filter(setSongsResponse.data, { artist_slug: 'phish' }).filter(
-    x => x.exclude === 0,
-  )
-
-  console.log(setSongs[0])
+  const { data } = await getSongFromSets(slug)
+  const setSongs = filter(data, { artist_slug: 'phish' }).filter(x => x.exclude == 0)
 
   return (
     <SlideUpWrapper>

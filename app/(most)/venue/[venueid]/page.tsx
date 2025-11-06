@@ -34,7 +34,7 @@ export default async function VenuePage({
 
   const setVenueResponse = await getVenueSetSongs(venueid)
   const setVenues = filter(setVenueResponse.data, { artist_slug: 'phish' }).filter(
-    x => x.exclude === 0,
+    x => x.exclude == 0,
   )
 
   const venueShowsSongs = uniqBy(setVenues, 'showid')

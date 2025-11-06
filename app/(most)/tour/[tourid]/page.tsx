@@ -35,7 +35,7 @@ export default async function VenuePage({
   const tourWhen = data[0].tourwhen
 
   const phishTourSongs = filter(data, { artist_slug: 'phish' }).filter(
-    x => x.exclude === 0,
+    x => x.exclude == 0,
   )
 
   const tourShowsSongs = uniqBy(phishTourSongs, 'showid')
