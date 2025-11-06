@@ -20,9 +20,12 @@ setInterval(() => {
 export function checkRateLimit(
   request: NextRequest,
   limit = 20, // 20 requests per window
-  window = 60000 // 1 minute window
+  window = 60000, // 1 minute window
 ): { allowed: boolean; remaining: number; resetTime: number } {
-  const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown'
+  const ip =
+    request.headers.get('x-forwarded-for')?.split(',')[0] ||
+    request.headers.get('x-real-ip') ||
+    'unknown'
   const now = Date.now()
   const record = rateLimit.get(ip)
 
@@ -37,6 +40,9 @@ export function checkRateLimit(
   }
 
   record.count++
-  return { allowed: true, remaining: limit - record.count, resetTime: record.resetTime }
+  return {
+    allowed: true,
+    remaining: limit - record.count,
+    resetTime: record.resetTime,
+  }
 }
-
