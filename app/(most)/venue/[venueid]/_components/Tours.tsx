@@ -5,6 +5,7 @@ import { SetSong } from '@/lib/models'
 import { uniqBy } from 'lodash'
 import { BusIcon } from 'lucide-react'
 import Link from 'next/link'
+import { HtmlText } from '@/components/html-text'
 
 export function VenueTours({ venueSongs }: { venueSongs: SetSong[] }) {
   const tours = uniqBy(venueSongs, 'tourname')
@@ -20,7 +21,7 @@ export function VenueTours({ venueSongs }: { venueSongs: SetSong[] }) {
               key={x.tourid}
               className={`${badgeVariants({ variant: 'outline' })} whitespace-nowrap`}
             >
-              {x.tourname}
+              <HtmlText>{x.tourname}</HtmlText>
             </Link>
           ))}
         </div>

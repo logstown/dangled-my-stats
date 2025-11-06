@@ -5,6 +5,7 @@ import { Show } from '@/lib/models'
 import { groupBy, map, mapValues, sortBy, uniqBy } from 'lodash'
 import Link from 'next/link'
 import { useMemo } from 'react'
+import { HtmlText } from '@/components/html-text'
 
 export function BrowseTours({ shows }: { shows: Show[] }) {
   const toursByCategory = useMemo(() => {
@@ -39,7 +40,7 @@ export function BrowseTours({ shows }: { shows: Show[] }) {
               {tours.map((tour: Show) => (
                 <li key={tour.tourid} className='truncate'>
                   <Link className='link-hover link' href={`/tour/${tour.tourid}`}>
-                    {tour.tour_name}
+                    <HtmlText>{tour.tour_name}</HtmlText>
                   </Link>
                 </li>
               ))}

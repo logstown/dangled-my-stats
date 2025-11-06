@@ -3,6 +3,7 @@
 import { Card } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
+import { HtmlText } from '@/components/html-text'
 import {
   Select,
   SelectContent,
@@ -141,7 +142,7 @@ export function BrowseSongs({ songs }: { songs: Song[] }) {
               {songs.map((song: Song) => (
                 <li key={song.slug} className='truncate'>
                   <Link className='link-hover link' href={`/song/${song.slug}`}>
-                    {song.song}
+                    <HtmlText>{song.song}</HtmlText>
                   </Link>
                 </li>
               ))}

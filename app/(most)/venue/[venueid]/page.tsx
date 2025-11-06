@@ -12,6 +12,7 @@ import { MostPlayedSongs } from '@/components/MostPlayedSongs'
 import { Card } from '@/components/ui/card'
 import { TicketIcon } from 'lucide-react'
 import { SlideUpWrapper } from '@/components/slide-up-wrapper'
+import { HtmlText } from '@/components/html-text'
 
 export default async function VenuePage({
   params,
@@ -56,10 +57,11 @@ export default async function VenuePage({
           <TicketIcon size={30} className='text-neutral-400' />
           <div>
             <h1 className='max-w-[700px] bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-center text-5xl font-bold tracking-tight text-transparent sm:text-left'>
-              {venue.venuename}
+              <HtmlText>{venue.venuename}</HtmlText>
             </h1>
             <h3 className='text-center font-light sm:ml-2 sm:text-left'>
-              {venue.city}, {venue.state || venue.country}
+              <HtmlText>{venue.city}</HtmlText>,{' '}
+              <HtmlText>{venue.state || venue.country}</HtmlText>
             </h3>
           </div>
         </div>

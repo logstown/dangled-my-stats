@@ -6,6 +6,7 @@ import { getAllSongs } from '@/lib/phish-service'
 import { find, reduce, uniqBy } from 'lodash'
 import { HandIcon } from 'lucide-react'
 import Link from 'next/link'
+import { HtmlText } from './html-text'
 
 export async function LastPlays({ setSongs }: { setSongs: SetSong[] }) {
   const { data: allSongs, error } = await getAllSongs()
@@ -38,7 +39,7 @@ export async function LastPlays({ setSongs }: { setSongs: SetSong[] }) {
               key={x.slug}
               className={`${badgeVariants({ variant: 'secondary' })} whitespace-nowrap`}
             >
-              {x.song}
+              <HtmlText>{x.song}</HtmlText>
             </Link>
           ))}
         </div>

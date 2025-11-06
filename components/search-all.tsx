@@ -2,6 +2,7 @@
 
 import { SearchIcon } from 'lucide-react'
 import { Button } from './ui/button'
+import { HtmlText } from './html-text'
 import {
   CommandDialog,
   CommandEmpty,
@@ -87,7 +88,7 @@ export function SearchAll({
                     key={song.slug}
                     onSelect={() => goToRoute(`/song/${song.slug}`)}
                   >
-                    {song.song}
+                    <HtmlText>{song.song}</HtmlText>
                   </CommandItem>
                 ))}
               </CommandGroup>
@@ -98,7 +99,7 @@ export function SearchAll({
                     key={venue.venueid}
                     onSelect={() => goToRoute(`/venue/${venue.venueid}`)}
                   >
-                    {venue.browse_name}
+                    <HtmlText>{venue.browse_name}</HtmlText>
                   </CommandItem>
                 ))}
               </CommandGroup>
@@ -109,7 +110,7 @@ export function SearchAll({
                     key={tour.tourid}
                     onSelect={() => goToRoute(`/tour/${tour.tourid}`)}
                   >
-                    {tour.tour_name}
+                    <HtmlText>{tour.tour_name}</HtmlText>
                   </CommandItem>
                 ))}
               </CommandGroup>

@@ -2,6 +2,7 @@
 
 import { ChevronsUpDownIcon, MusicIcon } from 'lucide-react'
 import { Bar, BarChart, XAxis, YAxis } from 'recharts'
+import { decodeHtml } from '@/lib/decode-html'
 
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import {
@@ -89,6 +90,7 @@ export function MostPlayedSongs({ setSongs }: { setSongs: SetSong[] }) {
               tickMargin={10}
               axisLine={false}
               width={200}
+              tickFormatter={decodeHtml}
             />
             <ChartTooltip
               cursor={false}

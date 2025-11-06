@@ -6,6 +6,7 @@ import { DataSet, Timeline } from 'vis-timeline/standalone'
 import 'vis-timeline/styles/vis-timeline-graph2d.css'
 import { SetSong } from '@/lib/models'
 import { find } from 'lodash'
+import { decodeHtml } from '@/lib/decode-html'
 import {
   Card,
   CardContent,
@@ -30,7 +31,9 @@ const ShowTimeline = ({
 
     const data = showSongs.map(x => ({
       id: x.uniqueid,
-      content: shouldDisplayDate ? x.showdate : `${x.city}, ${x.state || x.country}`,
+      content: shouldDisplayDate
+        ? x.showdate
+        : `${decodeHtml(x.city)}, ${decodeHtml(x.state || x.country)}`,
       start: x.showdate,
     }))
 

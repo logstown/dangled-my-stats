@@ -2,6 +2,7 @@
 
 import { Card } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
+import { HtmlText } from '@/components/html-text'
 import {
   Select,
   SelectContent,
@@ -127,9 +128,11 @@ export function BrowseVenues({ venues }: { venues: VenueBrowse[] }) {
               {venues.map((venue: VenueBrowse) => (
                 <li key={venue.venueid} className='truncate'>
                   <Link className='link-hover link' href={`/venue/${venue.venueid}`}>
-                    {selectedSortBy === 'letter'
-                      ? `${venue.browse_name}, ${venue.city}, ${venue.state || venue.country}`
-                      : `${venue.city}: ${venue.browse_name}`}
+                    <HtmlText>
+                      {selectedSortBy === 'letter'
+                        ? `${venue.browse_name}, ${venue.city}, ${venue.state || venue.country}`
+                        : `${venue.city}: ${venue.browse_name}`}
+                    </HtmlText>
                   </Link>
                 </li>
               ))}

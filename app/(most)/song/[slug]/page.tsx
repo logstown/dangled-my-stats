@@ -14,6 +14,7 @@ import ShowTimeline from '@/components/Timeline'
 import { Card } from '@/components/ui/card'
 import { MusicIcon } from 'lucide-react'
 import { SlideUpWrapper } from '@/components/slide-up-wrapper'
+import { HtmlText } from '@/components/html-text'
 
 // average length
 
@@ -38,22 +39,25 @@ export default async function SongPage({
   const mostPlayedSongCount = maxBy(allSongs, 'times_played')!.times_played
 
   const setSongsResponse = await getSongFromSets(slug)
+  console.log(setSongsResponse.error, setSongsResponse.data[0])
   const setSongs = filter(setSongsResponse.data, { artist_slug: 'phish' }).filter(
     x => x.exclude === 0,
   )
+
+  console.log(setSongs[0])
 
   return (
     <SlideUpWrapper>
       <div className='flex flex-wrap items-center justify-center gap-8 pb-12 sm:justify-between'>
         <div className='drop-shadow-2xl'>
           <h1 className='max-w-[700px] bg-gradient-to-br from-primary to-[#E76E50] bg-clip-text pb-2 text-center text-5xl font-bold tracking-tight text-transparent sm:text-left'>
-            {song.song}
+            <HtmlText>{song.song}</HtmlText>
             {song.abbr && (
-              <span className='ml-2 text-xl font-normal'>({song.abbr})</span>
+              <HtmlText className='ml-2 text-xl font-normal'>{`(${song.abbr})`}</HtmlText>
             )}
           </h1>
           <h3 className='text-center font-light sm:ml-2 sm:text-left'>
-            Original Artist: {song.artist}
+            Original Artist: <HtmlText>{song.artist}</HtmlText>
           </h3>
         </div>
         <Card className='w-full p-6 sm:w-fit'>
