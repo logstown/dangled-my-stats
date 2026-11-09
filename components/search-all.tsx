@@ -10,11 +10,11 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from './ui/command'
 import { useMemo, useState } from 'react'
 import { Show, Song, VenueBrowse } from '@/lib/models'
 import { useRouter } from 'next/navigation'
+import { decodeHtml } from '@/lib/decode-html'
 
 export function SearchAll({
   songs,
@@ -29,30 +29,33 @@ export function SearchAll({
 }) {
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+  const searchQuery = searchTerm.trim().toLowerCase()
   const router = useRouter()
 
   const filteredSongs = useMemo(
     () =>
       songs.filter(song =>
-        song.song.toLowerCase().includes(searchTerm.toLowerCase()),
+        decodeHtml(song.song).toLowerCase().includes(searchQuery),
       ),
-    [songs, searchTerm],
+    [songs, searchQuery],
   )
 
   const filteredVenues = useMemo(
     () =>
       venues.filter(venue =>
-        venue.browse_name.toLowerCase().includes(searchTerm.toLowerCase()),
+        decodeHtml(venue.browse_name).toLowerCase().includes(searchQuery),
       ),
-    [venues, searchTerm],
+    [venues, searchQuery],
   )
 
   const filteredTours = useMemo(
     () =>
       tours.filter(tour =>
-        tour.tour_name?.toLowerCase().includes(searchTerm.toLowerCase()),
+        decodeHtml(tour.tour_name ?? '')
+          .toLowerCase()
+          .includes(searchQuery),
       ),
-    [tours, searchTerm],
+    [tours, searchQuery],
   )
 
   const goToRoute = (url: string) => {
@@ -71,49 +74,61 @@ export function SearchAll({
           <SearchIcon className='h-5 w-5' />
         </Button>
       )}
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      {/* Results are filtered above; cmdk must not filter them a second time. */}
+      <CommandDialog open={open} onOpenChange={setOpen} shouldFilter={false}>
         <CommandInput
           placeholder='Search songs, venues, tours...'
           value={searchTerm}
           onValueChange={setSearchTerm}
         />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>
+            {searchQuery.length < 2
+              ? 'Type at least 2 characters to search.'
+              : 'No results found.'}
+          </CommandEmpty>
 
-          {searchTerm.length > 1 && (
+          {searchQuery.length > 1 && (
             <>
-              <CommandGroup heading='Songs'>
-                {filteredSongs.map(song => (
-                  <CommandItem
-                    key={song.slug}
-                    onSelect={() => goToRoute(`/song/${song.slug}`)}
-                  >
-                    <HtmlText>{song.song}</HtmlText>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-              <CommandSeparator />
-              <CommandGroup heading='Venues'>
-                {filteredVenues.map(venue => (
-                  <CommandItem
-                    key={venue.venueid}
-                    onSelect={() => goToRoute(`/venue/${venue.venueid}`)}
-                  >
-                    <HtmlText>{venue.browse_name}</HtmlText>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-              <CommandSeparator />
-              <CommandGroup heading='Tours'>
-                {filteredTours.map(tour => (
-                  <CommandItem
-                    key={tour.tourid}
-                    onSelect={() => goToRoute(`/tour/${tour.tourid}`)}
-                  >
-                    <HtmlText>{tour.tour_name}</HtmlText>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
+              {filteredSongs.length > 0 && (
+                <CommandGroup heading='Songs'>
+                  {filteredSongs.map(song => (
+                    <CommandItem
+                      key={song.slug}
+                      value={`song-${song.slug}`}
+                      onSelect={() => goToRoute(`/song/${song.slug}`)}
+                    >
+                      <HtmlText>{song.song}</HtmlText>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              )}
+              {filteredVenues.length > 0 && (
+                <CommandGroup heading='Venues'>
+                  {filteredVenues.map(venue => (
+                    <CommandItem
+                      key={venue.venueid}
+                      value={`venue-${venue.venueid}`}
+                      onSelect={() => goToRoute(`/venue/${venue.venueid}`)}
+                    >
+                      <HtmlText>{venue.browse_name}</HtmlText>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              )}
+              {filteredTours.length > 0 && (
+                <CommandGroup heading='Tours'>
+                  {filteredTours.map(tour => (
+                    <CommandItem
+                      key={tour.tourid}
+                      value={`tour-${tour.tourid}`}
+                      onSelect={() => goToRoute(`/tour/${tour.tourid}`)}
+                    >
+                      <HtmlText>{tour.tour_name}</HtmlText>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              )}
             </>
           )}
         </CommandList>
