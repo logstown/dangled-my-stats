@@ -34,7 +34,7 @@ export function NavSheet() {
       aria-description='navigation'
     >
       <SheetTrigger asChild>
-        <Button variant='ghost' size='icon'>
+        <Button variant='ghost' size='icon' aria-label='Open navigation'>
           <MenuIcon />
         </Button>
       </SheetTrigger>
@@ -78,6 +78,15 @@ export function NavSheet() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <RandomThing onClick={() => setOpen(false)} />
+            </NavigationMenuItem>
+            <NavigationMenuItem className='mt-4 w-full border-t pt-4'>
+              <NavigationMenuLink
+                asChild
+                onClick={() => setOpen(false)}
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href='/updates'>Updates</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink

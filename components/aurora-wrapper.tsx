@@ -6,7 +6,7 @@ import { SlideUpWrapper } from './slide-up-wrapper'
 
 export function AuroraWrapper({ children }: { children: ReactNode }) {
   return (
-    <AuroraBackground>
+    <AuroraBackground className='h-auto min-h-screen py-8'>
       <SlideUpWrapper>{children}</SlideUpWrapper>
     </AuroraBackground>
   )

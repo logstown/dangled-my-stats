@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Site updates
+
+The user-facing changelog lives at `/updates`. To publish an update, prepend an
+entry to `lib/updates.ts` with a unique, stable `id`, the release date (`YYYY-MM-DD`),
+a short title and summary, and changes grouped as `New`, `Improved`, or `Fixed`.
+Write entries in plain language about what visitors can now do or what was fixed.
+The first entry automatically appears in the homepage’s latest-update link.
+
 ## Getting Started
 
 First, run the development server:

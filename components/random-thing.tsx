@@ -105,7 +105,7 @@ export function RandomThing({ onClick }: { onClick?: () => void }) {
     }
   }
 
-  return pathname === '/about' ? null : (
+  return pathname === '/about' || pathname === '/updates' ? null : (
     <Button
       disabled={isLoading}
       variant='ghost'

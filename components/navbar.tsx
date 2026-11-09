@@ -36,26 +36,26 @@ export async function Navbar() {
   ]
 
   return (
-    <header className='flex h-16 shrink-0 items-center justify-between gap-2 border-b bg-primary px-4 text-primary-foreground shadow-2xl'>
-      <div className='md:hidden'>
+    <header className='bg-primary text-primary-foreground flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4 shadow-2xl'>
+      <div className='lg:hidden'>
         <NavSheet />
       </div>
-      <div className='flex items-center gap-16'>
+      <div className='flex items-center gap-6 xl:gap-16'>
         <Link href='/' className='flex items-end gap-6'>
           <Image
             src='/ai-thing.png'
-            className='hidden rounded-xl md:block'
+            className='hidden rounded-xl lg:block'
             width={35}
             height={35}
             alt='thing'
           />
           <span
-            className={` ${shirkhand.className} whitespace-nowrap text-2xl text-secondary`}
+            className={` ${shirkhand.className} text-secondary text-2xl whitespace-nowrap`}
           >
             Dangled My Stats
           </span>
         </Link>
-        <NavigationMenu className='hidden md:block'>
+        <NavigationMenu className='hidden lg:block'>
           <NavigationMenuList className='flex-row'>
             {/* <NavigationMenuItem>
               <NavigationMenuTrigger className='bg-primary text-base text-primary-foreground'>
@@ -90,7 +90,7 @@ export async function Navbar() {
                   asChild
                   className={
                     navigationMenuTriggerStyle() +
-                    ' items-center gap-2 bg-primary text-base! text-primary-foreground'
+                    ' bg-primary text-primary-foreground items-center gap-2 text-base!'
                   }
                 >
                   <Link href={x.href}>
@@ -100,12 +100,23 @@ export async function Navbar() {
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
-            <NavigationMenuItem className='pl-6'>
+            <NavigationMenuItem className='border-primary-foreground/25 ml-6 border-l pl-6'>
               <NavigationMenuLink
                 asChild
                 className={
                   navigationMenuTriggerStyle() +
-                  ' bg-primary text-base! text-primary-foreground'
+                  ' bg-primary text-primary-foreground/80 text-sm!'
+                }
+              >
+                <Link href='/updates'>Updates</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                className={
+                  navigationMenuTriggerStyle() +
+                  ' bg-primary text-primary-foreground/80 text-sm!'
                 }
               >
                 <Link href='/about'>About</Link>
@@ -115,7 +126,7 @@ export async function Navbar() {
         </NavigationMenu>
       </div>
       <div className='flex gap-4'>
-        <div className='hidden md:block'>
+        <div className='hidden lg:block'>
           <RandomThing />
         </div>
         <SearchAllServer isNavbar />
